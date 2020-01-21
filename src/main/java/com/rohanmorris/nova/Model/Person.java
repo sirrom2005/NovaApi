@@ -1,13 +1,15 @@
 package com.rohanmorris.nova.Model;
 
 public class Person {
-    private int id;
-    private String UserName;
-    private String FirstName;
-    private String MiddleName;
-    private String LastName;
-    private String Gender;
-    private String DOB;
+
+    private String account_id;
+    private String username;
+    private String firstname;
+    private String middlename;
+    private String lastname;
+    private String gender;
+    private String dob;
+    private String active;
 
     public enum Gender {
         Male, Female, Other
@@ -17,118 +19,84 @@ public class Person {
         Admin, Teacher, Parent, Student
     }
 
-    /**
-     * @param id
-     * @param userName
-     * @param firstName
-     * @param middleName
-     * @param lastName
-     * @param Gender
-     */
-    public Person(int id, String userName, String firstName, String middleName, String lastName, String gender) {
-        this.id = id;
-        this.UserName = userName;
-        this.FirstName = firstName;
-        this.MiddleName = middleName;
-        this.LastName = lastName;
-        this.Gender = gender;
+    public Person(){}
+
+    public Person(String account_id, String username, String firstname, String middlename, String lastname,
+            String gender, String dob, String active) {
+        this.account_id = account_id;
+        this.username = username;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.gender = gender;
+        this.dob = dob;
+        this.active = active;
     }
 
-    /**
-     * @return the firstName
-     */
-    public String getFirstName() {
-        return FirstName;
+    public Person(int id, String userName2, String firstName2, String middleName2, String lastName2, String gender2) {
+	}
+
+	public String getAccount_id() {
+        return account_id;
     }
 
-    /**
-     * @param firstName the firstName to set
-     */
-    public void setFirstName(String firstName) {
-        FirstName = firstName;
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
     }
 
-    /**
-     * @return the middleName
-     */
-    public String getMiddleName() {
-        return MiddleName;
+    public String getUsername() {
+        return username;
     }
 
-    /**
-     * @param middleName the middleName to set
-     */
-    public void setMiddleName(String middleName) {
-        MiddleName = middleName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    /**
-     * @return the lastName
-     */
-    public String getLastName() {
-        return LastName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    /**
-     * @param lastName the lastName to set
-     */
-    public void setLastName(String lastName) {
-        LastName = lastName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    /**
-     * @return the dOB
-     */
-    public String getDOB() {
-        return DOB;
+    public String getMiddlename() {
+        return middlename;
     }
 
-    /**
-     * @param dOB the dOB to set
-     */
-    public void setDOB(String dob) {
-        DOB = dob;
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
     }
 
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return UserName;
+    public String getLastname() {
+        return lastname;
     }
 
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        UserName = userName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    /**
-     * @return the gender
-     */
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
-    /**
-     * @param gender the gender to set
-     */
     public void setGender(String gender) {
-        Gender = gender;
+        this.gender = gender;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
+    public String getDob() {
+        return dob;
     }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    };
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getActive() {
+        return active;
+    }
+
+    public void setActive(String active) {
+        this.active = active;
+    }
 }

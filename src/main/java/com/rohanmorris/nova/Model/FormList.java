@@ -8,42 +8,41 @@ import org.hibernate.annotations.Immutable;
 @Entity
 @Table(name = "view_formlist")
 @Immutable
-public class Student {
-
+public class FormList {
     @Id
-    private String account_id;
+    private String student_id;
     private String username;
     private String firstname;
     private String middlename;
     private String lastname;
     private String gender;
-    //private String dob;
     private String active;
     private String class_id;
     private String formclass;
     private String school_id;
 
-    public Student(String account_id, String username, String firstname, String middlename, String lastname,
+    public FormList(){}
+
+    public FormList(String student_id, String username, String firstname, String middlename, String lastname,
             String gender, String active, String class_id, String formclass, String school_id) {
-        this.account_id = account_id;
+        this.student_id = student_id;
         this.username = username;
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
         this.gender = gender;
-        //this.dob = dob;
         this.active = active;
         this.class_id = class_id;
         this.formclass = formclass;
         this.school_id = school_id;
     }
 
-    public String getAccount_id() {
-        return account_id;
+    public String getStudent_id() {
+        return student_id;
     }
 
-    public void setAccount_id(String account_id) {
-        this.account_id = account_id;
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
     }
 
     public String getUsername() {
@@ -86,14 +85,6 @@ public class Student {
         this.gender = gender;
     }
 
-    /*public String getDob() {
-        return dob;
-    }
-
-    public void setDob(String dob) {
-        this.dob = dob;
-    }*/
-
     public String getActive() {
         return active;
     }
@@ -124,5 +115,6 @@ public class Student {
 
     public void setSchool_id(String school_id) {
         this.school_id = school_id;
-    } 
+    }
 }
+

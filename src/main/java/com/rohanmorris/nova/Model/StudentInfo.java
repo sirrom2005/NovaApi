@@ -16,6 +16,8 @@ public class StudentInfo extends Person {
     private String house_color_id;
     private String house_color;
 
+    
+
     /**
      * @param id
      * @param userName

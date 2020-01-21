@@ -10,37 +10,58 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import com.rohanmorris.nova.Interface.IPerson;
+import com.rohanmorris.nova.Model.FormList;
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Model.StudentInfo;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class PersonRepo implements IPerson {
 
-    private static final String _constr = "";
+    private SessionFactory sessionFactory;
+
+    public Session getDbSession() {
+        return this.sessionFactory.getCurrentSession();
+    }
+
+    private static final String _constr = "jdbc:mysql://localhost:3306/lyn_sys?user=root";
     private List<Student> list = new ArrayList<>();
     private HashMap<String, List<Student>> map = new HashMap<String, List<Student>>();
 
-    public PersonRepo() {
-        String sql = "SELECT * from view_formlist WHERE school_id = 1201103719;";
-        ResultSet rs;
-        try {
-            rs = execQuery(sql);
-            while (rs.next()) {
-                list.add(new Student(rs.getInt("student_id"), rs.getString("username"), rs.getString("firstname"),
-                        rs.getString("middlename"), rs.getString("lastname"), rs.getString("gender"),
-                        rs.getString("formclass")));
-            }
-        } catch (ClassNotFoundException | SQLException e1) {
-            e1.printStackTrace();
-        }
+    public PersonRepo(SessionFactory sf) {
+        this.sessionFactory = sf;
 
-        List<String> grade = list.stream().map(Student::getFormClass).distinct().collect(Collectors.toList());
-        grade.forEach(T -> {
-            map.put(T, list.stream().filter(p -> p.getFormClass().equals(T)).collect(Collectors.toList()));
-        });
+        /*
+         * Query q =
+         * sessionFactory.getCurrentSession().createQuery("SELECT * from view_formlist"
+         * );
+         * 
+         * String sql = "SELECT * from view_formlist WHERE school_id = 1201103719;";
+         * ResultSet rs; try { rs = execQuery(sql); while (rs.next()) { list.add(new
+         * Student(rs.getInt("student_id"), rs.getString("username"),
+         * rs.getString("firstname"), rs.getString("middlename"),
+         * rs.getString("lastname"), rs.getString("gender"),
+         * rs.getString("formclass"))); } } catch (ClassNotFoundException | SQLException
+         * e1) { e1.printStackTrace(); }
+         * 
+         * List<String> grade =
+         * list.stream().map(Student::getFormClass).distinct().collect(Collectors.toList
+         * ()); grade.forEach(T -> { map.put(T, list.stream().filter(p ->
+         * p.getFormClass().equals(T)).collect(Collectors.toList())); });
+         */
     }
 
     private ResultSet execQuery(String sql) throws ClassNotFoundException, SQLException {
@@ -78,17 +99,25 @@ public class PersonRepo implements IPerson {
 
     @Override
     public HashMap<String, List<Student>> read() {
+        List<Student> student = getDbSession().createQuery("FROM Student WHERE school_id = 1201103719").list();
+        List<String> grade = student.stream().map(Student::getFormclass).distinct().collect(Collectors.toList());
+
+        grade.forEach(T -> { 
+            map.put(T, student.stream().filter(p -> p.getFormclass().equals(T)).collect(Collectors.toList())); 
+        });
+
         return map;
     }
 
     @Override
     public int count() {
-        return list.size();
+        Object q = getDbSession().createSQLQuery("SELECT count(*) as cnt from view_formlist").uniqueResult();
+        return Integer.parseInt(String.valueOf(q));
     }
 
     @Override
     public boolean delete(int id) {
-        return list.remove(id).getUserName().equals("tboswell5696") ? true : false;
+        return false;//list.remove(id).getUserName().equals("tboswell5696") ? true : false;
     }
 
     @Override

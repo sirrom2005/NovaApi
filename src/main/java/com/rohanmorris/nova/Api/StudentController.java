@@ -3,6 +3,8 @@ package com.rohanmorris.nova.Api;
 import java.util.HashMap;
 import java.util.List;
 import javax.validation.Valid;
+
+import com.rohanmorris.nova.Model.FormList;
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Model.StudentInfo;
 import com.rohanmorris.nova.Service.StudentService;
@@ -52,5 +54,10 @@ public class StudentController {
     @DeleteMapping("{id}")
     public boolean delete(@PathVariable("id") int id) {
         return srv.delete(id);
+    }
+
+    @GetMapping("count")
+    public int get() {
+        return srv.getCount();
     }
 }
