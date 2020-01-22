@@ -1,8 +1,22 @@
 package com.rohanmorris.nova.Model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import org.hibernate.annotations.Immutable;
 
-public class StudentInfo extends Person {
+
+@Entity
+@Table(name = "view_student_info")
+@Immutable
+public class StudentInfo {
+    @Id
+    private String account_id;
+    private String username;
+    private String firstname;
+    private String middlename;
+    private String lastname;
+    private String gender;
     private String email;
     private String street;
     private String city_town;
@@ -15,15 +29,17 @@ public class StudentInfo extends Person {
     private String active;
     private String house_color_id;
     private String house_color;
+    private String class_id;
+    private String school_id;
 
-    
+    public StudentInfo(){}
 
     /**
-     * @param id
-     * @param userName
-     * @param firstName
-     * @param middleName
-     * @param lastName
+     * @param account_id
+     * @param username
+     * @param firstname
+     * @param middlename
+     * @param lastname
      * @param gender
      * @param email
      * @param street
@@ -37,13 +53,19 @@ public class StudentInfo extends Person {
      * @param active
      * @param house_color_id
      * @param house_color
+     * @param class_id
+     * @param school_id
      */
-    public StudentInfo(@JsonProperty("student_id") int id, @JsonProperty("username") String userName,
-            @JsonProperty("firstname") String firstName, @JsonProperty("middlename") String middleName,
-            @JsonProperty("lastname") String lastName, @JsonProperty("gender") String gender, String email,
-            String street, String city_town, String zip_code, String parish_id, String country_id, String phone_home,
-            String phone_mobile, String dob, String active, String house_color_id, String house_color) {
-        super(id, userName, firstName, middleName, lastName, gender);
+    public StudentInfo(String account_id, String username, String firstname, String middlename, String lastname,
+            String gender, String email, String street, String city_town, String zip_code, String parish_id,
+            String country_id, String phone_home, String phone_mobile, String dob, String active, String house_color_id,
+            String house_color, String class_id, String school_id) {
+        this.account_id = account_id;
+        this.username = username;
+        this.firstname = firstname;
+        this.middlename = middlename;
+        this.lastname = lastname;
+        this.gender = gender;
         this.email = email;
         this.street = street;
         this.city_town = city_town;
@@ -56,6 +78,92 @@ public class StudentInfo extends Person {
         this.active = active;
         this.house_color_id = house_color_id;
         this.house_color = house_color;
+        this.class_id = class_id;
+        this.school_id = school_id;
+    }
+
+    /**
+     * @return the account_id
+     */
+    public String getAccount_id() {
+        return account_id;
+    }
+
+    /**
+     * @param account_id the account_id to set
+     */
+    public void setAccount_id(String account_id) {
+        this.account_id = account_id;
+    }
+
+    /**
+     * @return the username
+     */
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * @param username the username to set
+     */
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /**
+     * @return the firstname
+     */
+    public String getFirstname() {
+        return firstname;
+    }
+
+    /**
+     * @param firstname the firstname to set
+     */
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    /**
+     * @return the middlename
+     */
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    /**
+     * @param middlename the middlename to set
+     */
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    /**
+     * @return the lastname
+     */
+    public String getLastname() {
+        return lastname;
+    }
+
+    /**
+     * @param lastname the lastname to set
+     */
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    /**
+     * @return the gender
+     */
+    public String getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     /**
@@ -224,5 +332,33 @@ public class StudentInfo extends Person {
      */
     public void setHouse_color(String house_color) {
         this.house_color = house_color;
+    }
+
+    /**
+     * @return the class_id
+     */
+    public String getClass_id() {
+        return class_id;
+    }
+
+    /**
+     * @param class_id the class_id to set
+     */
+    public void setClass_id(String class_id) {
+        this.class_id = class_id;
+    }
+
+    /**
+     * @return the school_id
+     */
+    public String getSchool_id() {
+        return school_id;
+    }
+
+    /**
+     * @param school_id the school_id to set
+     */
+    public void setSchool_id(String school_id) {
+        this.school_id = school_id;
     }
 }

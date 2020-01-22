@@ -1,35 +1,23 @@
 package com.rohanmorris.nova.Repo;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.rohanmorris.nova.Interface.IStudent;
+import com.rohanmorris.nova.Model.Student;
+import com.rohanmorris.nova.Model.StudentInfo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.transaction.Transactional;
-
-import com.rohanmorris.nova.Interface.IPerson;
-import com.rohanmorris.nova.Model.FormList;
-import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Model.StudentInfo;
-
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.type.IntegerType;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.server.ResponseStatusException;
 
+@Transactional
 @Repository
-public class PersonRepo implements IPerson {
+public class PersonRepo implements IStudent {
 
     private SessionFactory sessionFactory;
 
@@ -37,38 +25,10 @@ public class PersonRepo implements IPerson {
         return this.sessionFactory.getCurrentSession();
     }
 
-    private static final String _constr = "jdbc:mysql://localhost:3306/lyn_sys?user=root";
     private List<Student> list = new ArrayList<>();
-    private HashMap<String, List<Student>> map = new HashMap<String, List<Student>>();
 
     public PersonRepo(SessionFactory sf) {
         this.sessionFactory = sf;
-
-        /*
-         * Query q =
-         * sessionFactory.getCurrentSession().createQuery("SELECT * from view_formlist"
-         * );
-         * 
-         * String sql = "SELECT * from view_formlist WHERE school_id = 1201103719;";
-         * ResultSet rs; try { rs = execQuery(sql); while (rs.next()) { list.add(new
-         * Student(rs.getInt("student_id"), rs.getString("username"),
-         * rs.getString("firstname"), rs.getString("middlename"),
-         * rs.getString("lastname"), rs.getString("gender"),
-         * rs.getString("formclass"))); } } catch (ClassNotFoundException | SQLException
-         * e1) { e1.printStackTrace(); }
-         * 
-         * List<String> grade =
-         * list.stream().map(Student::getFormClass).distinct().collect(Collectors.toList
-         * ()); grade.forEach(T -> { map.put(T, list.stream().filter(p ->
-         * p.getFormClass().equals(T)).collect(Collectors.toList())); });
-         */
-    }
-
-    private ResultSet execQuery(String sql) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connect = DriverManager.getConnection(_constr);
-        Statement statement = connect.createStatement();
-        return statement.executeQuery(sql);
     }
 
     @Override
@@ -79,49 +39,53 @@ public class PersonRepo implements IPerson {
 
     @Override
     public StudentInfo findById(int id) {
-        String sql = "select * from view_student_list where student_id = " + id;
-        ResultSet rs;
-        try {
-            rs = execQuery(sql);
-            while (rs.next()) {
-                return new StudentInfo(rs.getInt("student_id"), rs.getString("username"), rs.getString("firstname"),
-                        rs.getString("middlename"), rs.getString("lastname"), rs.getString("gender"),
-                        rs.getString("email"), rs.getString("street"), rs.getString("city_town"),
-                        rs.getString("zip_code"), rs.getString("parish_id"), rs.getString("country_id"),
-                        rs.getString("phone_home"), rs.getString("phone_mobile"), rs.getString("dob"),
-                        rs.getString("active"), rs.getString("house_color_id"), rs.getString("house_color"));
-            }
-        } catch (ClassNotFoundException | SQLException e1) {
-            e1.printStackTrace();
+        StudentInfo info = (StudentInfo) getDbSession()
+                                            .createQuery("FROM StudentInfo WHERE account_id = :id")
+                                            .setParameter("id", id, IntegerType.INSTANCE)
+                                            .uniqueResult();
+        if(info!=null){
+            return info;
         }
-        return null;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public HashMap<String, List<Student>> read() {
-        List<Student> student = getDbSession().createQuery("FROM Student WHERE school_id = 1201103719").list();
+        HashMap<String, List<Student>> studentMap = new HashMap<String, List<Student>>();
+        List<Student> student = getDbSession().createQuery("FROM Student WHERE school_id = :id")
+                                .setParameter("id", 1201103719, IntegerType.INSTANCE)
+                                .list();
         List<String> grade = student.stream().map(Student::getFormclass).distinct().collect(Collectors.toList());
 
-        grade.forEach(T -> { 
-            map.put(T, student.stream().filter(p -> p.getFormclass().equals(T)).collect(Collectors.toList())); 
+        grade.forEach(T -> {
+            studentMap.put(T, student.stream().filter(p -> p.getFormclass().equals(T)).collect(Collectors.toList()));
         });
 
-        return map;
+        return studentMap;
     }
 
     @Override
-    public int count() {
-        Object q = getDbSession().createSQLQuery("SELECT count(*) as cnt from view_formlist").uniqueResult();
-        return Integer.parseInt(String.valueOf(q));
-    }
+    public int delete(int id) { 
+        int rs = getDbSession()
+                            .createSQLQuery("DELETE FROM accounts WHERE id = :id")
+                            .setParameter("id", id, IntegerType.INSTANCE)
+                            .executeUpdate();
+        if(rs>0){
+            return rs;
+        }
 
-    @Override
-    public boolean delete(int id) {
-        return false;//list.remove(id).getUserName().equals("tboswell5696") ? true : false;
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);                         
     }
 
     @Override
     public Student update(int id, Student student) {
         return list.set(id, student);
+    }
+
+    @Override
+    public int count() {
+        Object q = getDbSession().createQuery("SELECT count(*) as cnt FROM Student").uniqueResult();
+        return Integer.parseInt(String.valueOf(q));
     }
 }
