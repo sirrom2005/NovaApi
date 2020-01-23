@@ -39,7 +39,7 @@ public class StudentController {
         return srv.findById(id);
     }
 
-    @PostMapping()
+    /*@PostMapping()
     public int create(@Valid @RequestBody Student student) {
         return srv.create(student);
     }
@@ -47,7 +47,7 @@ public class StudentController {
     @PutMapping("{id}")
     public Student update(@PathVariable("id") int id, @RequestBody Student student) {
         return srv.update(id, student);
-    }
+    }*/
 
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") int id) {

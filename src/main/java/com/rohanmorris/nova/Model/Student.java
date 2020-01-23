@@ -11,7 +11,7 @@ import org.hibernate.annotations.Immutable;
 public class Student {
 
     @Id
-    private String account_id;
+    private int account_id;
     private String username;
     private String firstname;
     private String middlename;
@@ -36,7 +36,7 @@ public class Student {
      * @param formclass
      * @param school_id
      */
-    public Student(String account_id, String username, String firstname, String middlename, String lastname,
+    public Student(int account_id, String username, String firstname, String middlename, String lastname,
             String gender, String active, String class_id, String formclass, String school_id) {
         this.account_id = account_id;
         this.username = username;
@@ -53,14 +53,14 @@ public class Student {
     /**
      * @return the account_id
      */
-    public String getAccount_id() {
+    public int getAccount_id() {
         return account_id;
     }
 
     /**
      * @param account_id the account_id to set
      */
-    public void setAccount_id(String account_id) {
+    public void setAccount_id(int account_id) {
         this.account_id = account_id;
     }
 
