@@ -5,7 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.Immutable;
 
-
 @Entity
 @Table(name = "view_student_info")
 @Immutable
@@ -32,7 +31,8 @@ public class StudentInfo {
     private String class_id;
     private String school_id;
 
-    public StudentInfo(){}
+    public StudentInfo() {
+    }
 
     /**
      * @param account_id

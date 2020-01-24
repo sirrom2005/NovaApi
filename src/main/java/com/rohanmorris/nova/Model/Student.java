@@ -22,7 +22,8 @@ public class Student {
     private String formclass;
     private String school_id;
 
-    Student(){}
+    Student() {
+    }
 
     /**
      * @param account_id
@@ -36,8 +37,8 @@ public class Student {
      * @param formclass
      * @param school_id
      */
-    public Student(int account_id, String username, String firstname, String middlename, String lastname,
-            String gender, String active, String class_id, String formclass, String school_id) {
+    public Student(int account_id, String username, String firstname, String middlename, String lastname, String gender,
+            String active, String class_id, String formclass, String school_id) {
         this.account_id = account_id;
         this.username = username;
         this.firstname = firstname;

@@ -39,11 +39,9 @@ public class PersonRepo implements IStudent {
 
     @Override
     public StudentInfo findById(int id) {
-        StudentInfo info = (StudentInfo) getDbSession()
-                                            .createQuery("FROM StudentInfo WHERE account_id = :id")
-                                            .setParameter("id", id, IntegerType.INSTANCE)
-                                            .uniqueResult();
-        if(info!=null){
+        StudentInfo info = (StudentInfo) getDbSession().createQuery("FROM StudentInfo WHERE account_id = :id")
+                .setParameter("id", id, IntegerType.INSTANCE).uniqueResult();
+        if (info != null) {
             return info;
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -54,8 +52,7 @@ public class PersonRepo implements IStudent {
     public HashMap<String, List<Student>> read() {
         HashMap<String, List<Student>> studentMap = new HashMap<String, List<Student>>();
         List<Student> student = getDbSession().createQuery("FROM Student WHERE school_id = :id")
-                                .setParameter("id", 1201103719, IntegerType.INSTANCE)
-                                .list();
+                .setParameter("id", 1201103719, IntegerType.INSTANCE).list();
         List<String> grade = student.stream().map(Student::getFormclass).distinct().collect(Collectors.toList());
 
         grade.forEach(T -> {
@@ -66,16 +63,14 @@ public class PersonRepo implements IStudent {
     }
 
     @Override
-    public int delete(int id) { 
-        int rs = getDbSession()
-                            .createSQLQuery("DELETE FROM accounts WHERE id = :id")
-                            .setParameter("id", id, IntegerType.INSTANCE)
-                            .executeUpdate();
-        if(rs>0){
+    public int delete(int id) {
+        int rs = getDbSession().createSQLQuery("DELETE FROM accounts WHERE id = :id")
+                .setParameter("id", id, IntegerType.INSTANCE).executeUpdate();
+        if (rs > 0) {
             return rs;
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);                         
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override
