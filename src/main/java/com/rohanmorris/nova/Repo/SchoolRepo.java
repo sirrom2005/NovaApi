@@ -35,9 +35,7 @@ public class SchoolRepo implements ISchool {
     @SuppressWarnings("unchecked")
     @Override
     public List<School> read() {
-        List<School> info = getDbSession().createQuery(
-                "SELECT school_id as aaa, name, street, city_town, zip_code, email, fax, phone_num1, enable FROM School")
-                .list();
+        List<School> info = getDbSession().createQuery("FROM School").list();
         if (info != null) {
             return info;
         }

@@ -5,10 +5,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -22,8 +24,6 @@ public class School {
     private String street;
     private String city_town;
     private String zip_code;
-    private int parish_id;
-    private int country_id;
     private String phone_num1;
     private String phone_num2;
     private String fax;
@@ -34,9 +34,15 @@ public class School {
     private int enable;
     private int show_on_site;
     private String date_added;
-    @OneToMany()
+    @OneToMany
     @JoinTable(name = "subject_school", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
     private List<Subject> subject_list = new ArrayList<Subject>();
+    @OneToOne
+    @JoinColumn(name = "country_id", referencedColumnName = "country_id")
+    private Country country;
+    @OneToOne
+    @JoinColumn(name = "parish_id", referencedColumnName = "zone_id")
+    private CountryState state;
 
     /**
      * @return the school_id
@@ -120,34 +126,6 @@ public class School {
      */
     public void setZip_code(String zip_code) {
         this.zip_code = zip_code;
-    }
-
-    /**
-     * @return the parish_id
-     */
-    public int getParish_id() {
-        return parish_id;
-    }
-
-    /**
-     * @param parish_id the parish_id to set
-     */
-    public void setParish_id(int parish_id) {
-        this.parish_id = parish_id;
-    }
-
-    /**
-     * @return the country_id
-     */
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    /**
-     * @param country_id the country_id to set
-     */
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
     }
 
     /**
@@ -302,5 +280,21 @@ public class School {
      */
     public void setSubject_list(List<Subject> subject_list) {
         this.subject_list = subject_list;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public CountryState getState() {
+        return state;
+    }
+
+    public void setState(CountryState state) {
+        this.state = state;
     }
 }
