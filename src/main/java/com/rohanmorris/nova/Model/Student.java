@@ -6,10 +6,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Immutable;
 
 @Entity
-@Table(name = "view_formlist")
+@Table(name = "view_student_info")
 @Immutable
 public class Student {
-
     @Id
     private int account_id;
     private String username;
@@ -17,10 +16,21 @@ public class Student {
     private String middlename;
     private String lastname;
     private String gender;
+    private String email;
+    private String street;
+    private String city_town;
+    private String zip_code;
+    private int parish_id;
+    private int country_id;
+    private String phone_home;
+    private String phone_mobile;
+    private String dob;
     private int active;
+    private int house_color_id;
+    private String house_color;
     private int class_id;
-    private String formclass;
     private int school_id;
+    private String formclass;
 
     /**
      * @return the account_id
@@ -107,6 +117,132 @@ public class Student {
     }
 
     /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the street
+     */
+    public String getStreet() {
+        return street;
+    }
+
+    /**
+     * @param street the street to set
+     */
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    /**
+     * @return the city_town
+     */
+    public String getCity_town() {
+        return city_town;
+    }
+
+    /**
+     * @param city_town the city_town to set
+     */
+    public void setCity_town(String city_town) {
+        this.city_town = city_town;
+    }
+
+    /**
+     * @return the zip_code
+     */
+    public String getZip_code() {
+        return zip_code;
+    }
+
+    /**
+     * @param zip_code the zip_code to set
+     */
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+
+    /**
+     * @return the parish_id
+     */
+    public int getParish_id() {
+        return parish_id;
+    }
+
+    /**
+     * @param parish_id the parish_id to set
+     */
+    public void setParish_id(int parish_id) {
+        this.parish_id = parish_id;
+    }
+
+    /**
+     * @return the country_id
+     */
+    public int getCountry_id() {
+        return country_id;
+    }
+
+    /**
+     * @param country_id the country_id to set
+     */
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
+    }
+
+    /**
+     * @return the phone_home
+     */
+    public String getPhone_home() {
+        return phone_home;
+    }
+
+    /**
+     * @param phone_home the phone_home to set
+     */
+    public void setPhone_home(String phone_home) {
+        this.phone_home = phone_home;
+    }
+
+    /**
+     * @return the phone_mobile
+     */
+    public String getPhone_mobile() {
+        return phone_mobile;
+    }
+
+    /**
+     * @param phone_mobile the phone_mobile to set
+     */
+    public void setPhone_mobile(String phone_mobile) {
+        this.phone_mobile = phone_mobile;
+    }
+
+    /**
+     * @return the dob
+     */
+    public String getDob() {
+        return dob;
+    }
+
+    /**
+     * @param dob the dob to set
+     */
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    /**
      * @return the active
      */
     public int getActive() {
@@ -118,6 +254,34 @@ public class Student {
      */
     public void setActive(int active) {
         this.active = active;
+    }
+
+    /**
+     * @return the house_color_id
+     */
+    public int getHouse_color_id() {
+        return house_color_id;
+    }
+
+    /**
+     * @param house_color_id the house_color_id to set
+     */
+    public void setHouse_color_id(int house_color_id) {
+        this.house_color_id = house_color_id;
+    }
+
+    /**
+     * @return the house_color
+     */
+    public String getHouse_color() {
+        return house_color;
+    }
+
+    /**
+     * @param house_color the house_color to set
+     */
+    public void setHouse_color(String house_color) {
+        this.house_color = house_color;
     }
 
     /**
@@ -135,20 +299,6 @@ public class Student {
     }
 
     /**
-     * @return the formclass
-     */
-    public String getFormclass() {
-        return formclass;
-    }
-
-    /**
-     * @param formclass the formclass to set
-     */
-    public void setFormclass(String formclass) {
-        this.formclass = formclass;
-    }
-
-    /**
      * @return the school_id
      */
     public int getSchool_id() {
@@ -160,5 +310,13 @@ public class Student {
      */
     public void setSchool_id(int school_id) {
         this.school_id = school_id;
+    }
+
+    public String getFormclass() {
+        return formclass;
+    }
+
+    public void setFormclass(String formclass) {
+        this.formclass = formclass;
     }
 }

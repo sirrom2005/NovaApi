@@ -1,7 +1,6 @@
 package com.rohanmorris.nova.Service;
 
 import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Model.StudentInfo;
 import com.rohanmorris.nova.Repo.StudentRepo;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +26,7 @@ public class StudentService {
         return repo.create(student);
     }
 
-    public StudentInfo findById(int id) {
+    public Student findById(int id) {
         return repo.findById(id);
     }
 

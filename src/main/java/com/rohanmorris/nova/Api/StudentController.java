@@ -1,7 +1,6 @@
 package com.rohanmorris.nova.Api;
 
 import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Model.StudentInfo;
 import com.rohanmorris.nova.Service.StudentService;
 import java.util.HashMap;
 import java.util.List;
@@ -31,7 +30,7 @@ public class StudentController {
     }
 
     @GetMapping("{id}")
-    public StudentInfo findById(@PathVariable("id") int id) {
+    public Student findById(@PathVariable("id") int id) {
         return srv.findById(id);
     }
 

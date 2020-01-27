@@ -1,7 +1,6 @@
 package com.rohanmorris.nova.Interface;
 
 import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Model.StudentInfo;
 import java.util.HashMap;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface IStudent {
 
     public int delete(int id);
 
-    public StudentInfo findById(int id);
+    public Student findById(int id);
 
     public int count();
 }

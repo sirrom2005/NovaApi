@@ -2,7 +2,6 @@ package com.rohanmorris.nova.Repo;
 
 import com.rohanmorris.nova.Interface.IStudent;
 import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Model.StudentInfo;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,8 +37,8 @@ public class StudentRepo implements IStudent {
     }
 
     @Override
-    public StudentInfo findById(int id) {
-        StudentInfo info = (StudentInfo) getDbSession().createQuery("FROM StudentInfo WHERE account_id = :id")
+    public Student findById(int id) {
+        Student info = (Student) getDbSession().createQuery("FROM Student WHERE account_id = :id")
                 .setParameter("id", id, IntegerType.INSTANCE).uniqueResult();
         if (info != null) {
             return info;
