@@ -5,24 +5,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "subjects")
-public class Subject {
+@Table(name = "odb_country")
+public class Country {
     @Id
-    private int id;
-    private String name;
+    public int country_id;
+    public String name;
 
     /**
-     * @return the id
+     * @return the country_id
      */
-    public int getId() {
-        return id;
+    public int getCountry_id() {
+        return country_id;
     }
 
     /**
-     * @param id the id to set
+     * @param country_id the country_id to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
     }
 
     /**

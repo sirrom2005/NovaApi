@@ -2,7 +2,7 @@ package com.rohanmorris.nova.Service;
 
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Model.StudentInfo;
-import com.rohanmorris.nova.Repo.PersonRepo;
+import com.rohanmorris.nova.Repo.StudentRepo;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentService {
 
-    private final PersonRepo repo;
+    private final StudentRepo repo;
 
     /**
      * @param repo
      */
-    public StudentService(PersonRepo repo) {
+    public StudentService(StudentRepo repo) {
         this.repo = repo;
     }
 

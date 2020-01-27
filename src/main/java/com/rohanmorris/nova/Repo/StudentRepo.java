@@ -17,7 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 @Transactional
 @Repository
-public class PersonRepo implements IStudent {
+public class StudentRepo implements IStudent {
 
     private SessionFactory sessionFactory;
 
@@ -27,7 +27,7 @@ public class PersonRepo implements IStudent {
 
     private List<Student> list = new ArrayList<>();
 
-    public PersonRepo(SessionFactory sf) {
+    public StudentRepo(SessionFactory sf) {
         this.sessionFactory = sf;
     }
 

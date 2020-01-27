@@ -1,5 +1,7 @@
 package com.rohanmorris.nova.Api;
 
+import java.util.List;
+
 import com.rohanmorris.nova.Model.School;
 import com.rohanmorris.nova.Service.SchoolService;
 
@@ -19,6 +21,11 @@ public class SchoolController {
     @Autowired
     public SchoolController(SchoolService srv) {
         this.srv = srv;
+    }
+
+    @GetMapping()
+    public List<School> name() {
+        return srv.read();
     }
 
     @GetMapping("{id}")

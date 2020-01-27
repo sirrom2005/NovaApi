@@ -32,10 +32,16 @@ public class SchoolRepo implements ISchool {
         return 0;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<School> read() {
-        // TODO Auto-generated method stub
-        return null;
+        List<School> info = getDbSession().createQuery(
+                "SELECT school_id as aaa, name, street, city_town, zip_code, email, fax, phone_num1, enable FROM School")
+                .list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override

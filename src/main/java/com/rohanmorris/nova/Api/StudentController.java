@@ -1,12 +1,10 @@
 package com.rohanmorris.nova.Api;
 
-import java.util.HashMap;
-import java.util.List;
-
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Model.StudentInfo;
 import com.rohanmorris.nova.Service.StudentService;
-
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;

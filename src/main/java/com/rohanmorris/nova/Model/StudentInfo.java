@@ -25,62 +25,11 @@ public class StudentInfo {
     private String phone_home;
     private String phone_mobile;
     private String dob;
-    private String active;
-    private String house_color_id;
+    private int active;
+    private int house_color_id;
     private String house_color;
-    private String class_id;
-    private String school_id;
-
-    public StudentInfo() {
-    }
-
-    /**
-     * @param account_id
-     * @param username
-     * @param firstname
-     * @param middlename
-     * @param lastname
-     * @param gender
-     * @param email
-     * @param street
-     * @param city_town
-     * @param zip_code
-     * @param parish_id
-     * @param country_id
-     * @param phone_home
-     * @param phone_mobile
-     * @param dob
-     * @param active
-     * @param house_color_id
-     * @param house_color
-     * @param class_id
-     * @param school_id
-     */
-    public StudentInfo(int account_id, String username, String firstname, String middlename, String lastname,
-            String gender, String email, String street, String city_town, String zip_code, String parish_id,
-            String country_id, String phone_home, String phone_mobile, String dob, String active, String house_color_id,
-            String house_color, String class_id, String school_id) {
-        this.account_id = account_id;
-        this.username = username;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.email = email;
-        this.street = street;
-        this.city_town = city_town;
-        this.zip_code = zip_code;
-        this.parish_id = parish_id;
-        this.country_id = country_id;
-        this.phone_home = phone_home;
-        this.phone_mobile = phone_mobile;
-        this.dob = dob;
-        this.active = active;
-        this.house_color_id = house_color_id;
-        this.house_color = house_color;
-        this.class_id = class_id;
-        this.school_id = school_id;
-    }
+    private int class_id;
+    private int school_id;
 
     /**
      * @return the account_id
@@ -295,28 +244,28 @@ public class StudentInfo {
     /**
      * @return the active
      */
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
     /**
      * @param active the active to set
      */
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
     /**
      * @return the house_color_id
      */
-    public String getHouse_color_id() {
+    public int getHouse_color_id() {
         return house_color_id;
     }
 
     /**
      * @param house_color_id the house_color_id to set
      */
-    public void setHouse_color_id(String house_color_id) {
+    public void setHouse_color_id(int house_color_id) {
         this.house_color_id = house_color_id;
     }
 
@@ -337,28 +286,28 @@ public class StudentInfo {
     /**
      * @return the class_id
      */
-    public String getClass_id() {
+    public int getClass_id() {
         return class_id;
     }
 
     /**
      * @param class_id the class_id to set
      */
-    public void setClass_id(String class_id) {
+    public void setClass_id(int class_id) {
         this.class_id = class_id;
     }
 
     /**
      * @return the school_id
      */
-    public String getSchool_id() {
+    public int getSchool_id() {
         return school_id;
     }
 
     /**
      * @param school_id the school_id to set
      */
-    public void setSchool_id(String school_id) {
+    public void setSchool_id(int school_id) {
         this.school_id = school_id;
     }
 }

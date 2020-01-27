@@ -1,21 +1,29 @@
 package com.rohanmorris.nova.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "schools")
 public class School {
     @Id
-    private int id;
+    @Column(name = "id")
+    private int school_id;
     private String name;
     private String url_name;
     private String street;
     private String city_town;
     private String zip_code;
-    private String parish_id;
-    private String country_id;
+    private int parish_id;
+    private int country_id;
     private String phone_num1;
     private String phone_num2;
     private String fax;
@@ -23,26 +31,25 @@ public class School {
     private String logo;
     private String motto;
     private String about_school;
-    private String enable;
-    private String show_on_site;
+    private int enable;
+    private int show_on_site;
     private String date_added;
+    @OneToMany()
+    @JoinTable(name = "subject_school", joinColumns = @JoinColumn(name = "school_id"), inverseJoinColumns = @JoinColumn(name = "subject_id"))
+    private List<Subject> subject_list = new ArrayList<Subject>();
 
-    // @OneToMany
-    // @JoinTable(name = "subject_school", joinColumns = @JoinColumn(name = "id"),
-    // inverseJoinColumns = @JoinColumn(name = "school_id"))
-    // private Set<SubjectSchool> subject = new HashSet<SubjectSchool>();
     /**
-     * @return the id
+     * @return the school_id
      */
-    public int getId() {
-        return id;
+    public int getSchool_id() {
+        return school_id;
     }
 
     /**
-     * @param id the id to set
+     * @param school_id the school_id to set
      */
-    public void setId(int id) {
-        this.id = id;
+    public void setSchool_id(int school_id) {
+        this.school_id = school_id;
     }
 
     /**
@@ -118,28 +125,28 @@ public class School {
     /**
      * @return the parish_id
      */
-    public String getParish_id() {
+    public int getParish_id() {
         return parish_id;
     }
 
     /**
      * @param parish_id the parish_id to set
      */
-    public void setParish_id(String parish_id) {
+    public void setParish_id(int parish_id) {
         this.parish_id = parish_id;
     }
 
     /**
      * @return the country_id
      */
-    public String getCountry_id() {
+    public int getCountry_id() {
         return country_id;
     }
 
     /**
      * @param country_id the country_id to set
      */
-    public void setCountry_id(String country_id) {
+    public void setCountry_id(int country_id) {
         this.country_id = country_id;
     }
 
@@ -244,28 +251,28 @@ public class School {
     /**
      * @return the enable
      */
-    public String getEnable() {
+    public int getEnable() {
         return enable;
     }
 
     /**
      * @param enable the enable to set
      */
-    public void setEnable(String enable) {
+    public void setEnable(int enable) {
         this.enable = enable;
     }
 
     /**
      * @return the show_on_site
      */
-    public String getShow_on_site() {
+    public int getShow_on_site() {
         return show_on_site;
     }
 
     /**
      * @param show_on_site the show_on_site to set
      */
-    public void setShow_on_site(String show_on_site) {
+    public void setShow_on_site(int show_on_site) {
         this.show_on_site = show_on_site;
     }
 
@@ -281,5 +288,19 @@ public class School {
      */
     public void setDate_added(String date_added) {
         this.date_added = date_added;
+    }
+
+    /**
+     * @return the subject_list
+     */
+    public List<Subject> getSubject_list() {
+        return subject_list;
+    }
+
+    /**
+     * @param subject_list the subject_list to set
+     */
+    public void setSubject_list(List<Subject> subject_list) {
+        this.subject_list = subject_list;
     }
 }

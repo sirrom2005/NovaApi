@@ -17,39 +17,10 @@ public class Student {
     private String middlename;
     private String lastname;
     private String gender;
-    private String active;
-    private String class_id;
+    private int active;
+    private int class_id;
     private String formclass;
-    private String school_id;
-
-    Student() {
-    }
-
-    /**
-     * @param account_id
-     * @param username
-     * @param firstname
-     * @param middlename
-     * @param lastname
-     * @param gender
-     * @param active
-     * @param class_id
-     * @param formclass
-     * @param school_id
-     */
-    public Student(int account_id, String username, String firstname, String middlename, String lastname, String gender,
-            String active, String class_id, String formclass, String school_id) {
-        this.account_id = account_id;
-        this.username = username;
-        this.firstname = firstname;
-        this.middlename = middlename;
-        this.lastname = lastname;
-        this.gender = gender;
-        this.active = active;
-        this.class_id = class_id;
-        this.formclass = formclass;
-        this.school_id = school_id;
-    }
+    private int school_id;
 
     /**
      * @return the account_id
@@ -138,28 +109,28 @@ public class Student {
     /**
      * @return the active
      */
-    public String getActive() {
+    public int getActive() {
         return active;
     }
 
     /**
      * @param active the active to set
      */
-    public void setActive(String active) {
+    public void setActive(int active) {
         this.active = active;
     }
 
     /**
      * @return the class_id
      */
-    public String getClass_id() {
+    public int getClass_id() {
         return class_id;
     }
 
     /**
      * @param class_id the class_id to set
      */
-    public void setClass_id(String class_id) {
+    public void setClass_id(int class_id) {
         this.class_id = class_id;
     }
 
@@ -180,14 +151,14 @@ public class Student {
     /**
      * @return the school_id
      */
-    public String getSchool_id() {
+    public int getSchool_id() {
         return school_id;
     }
 
     /**
      * @param school_id the school_id to set
      */
-    public void setSchool_id(String school_id) {
+    public void setSchool_id(int school_id) {
         this.school_id = school_id;
     }
 }
