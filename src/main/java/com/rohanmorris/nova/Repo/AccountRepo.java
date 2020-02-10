@@ -1,6 +1,5 @@
 package com.rohanmorris.nova.Repo;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.transaction.Transactional;

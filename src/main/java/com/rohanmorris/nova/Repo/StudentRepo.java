@@ -3,7 +3,6 @@ package com.rohanmorris.nova.Repo;
 import com.rohanmorris.nova.Interface.IStudent;
 import com.rohanmorris.nova.Model.Student;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,9 +32,13 @@ public class StudentRepo implements IStudent {
     }
 
     @Override
-    public int create(Student student) {
-        Serializable id = getDbSession().save(student);
-        return 1;
+    public long create(Student student) {
+        Object id = getDbSession().save(student);
+
+        if (id != null) {
+            return Long.parseLong(String.valueOf(id));
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override

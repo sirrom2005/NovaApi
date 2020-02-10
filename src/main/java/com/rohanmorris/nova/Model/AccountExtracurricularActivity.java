@@ -28,4 +28,18 @@ public class AccountExtracurricularActivity {
     public void setAccount_id(int account_id) {
         this.account_id = account_id;
     }
+
+    /**
+     * @return the extracurricular_activity_id
+     */
+    public int getExtracurricular_activity_id() {
+        return extracurricular_activity_id;
+    }
+
+    /**
+     * @param extracurricular_activity_id the extracurricular_activity_id to set
+     */
+    public void setExtracurricular_activity_id(int extracurricular_activity_id) {
+        this.extracurricular_activity_id = extracurricular_activity_id;
+    }
 }

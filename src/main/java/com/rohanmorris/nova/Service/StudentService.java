@@ -22,7 +22,7 @@ public class StudentService {
         return repo.read();
     }
 
-    public int create(Student student) {
+    public long create(Student student) {
         return repo.create(student);
     }
 
