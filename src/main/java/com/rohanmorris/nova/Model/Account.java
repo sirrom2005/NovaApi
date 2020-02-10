@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @SecondaryTable(name = "account_school",        pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
 @SecondaryTable(name = "house_color_account",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
 @SecondaryTable(name = "class_room_students",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
+@SecondaryTable(name = "teacher_qualification", pkJoinColumns = @PrimaryKeyJoinColumn(name = "teacher_id"))
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,6 +63,8 @@ public class Account {
     private HouseColor housecolor;
     @Embedded()
     private ClassRoomStudent classroom;
+    @Embedded()
+    private Qualification qualification;
     @OneToMany
     @JoinTable(name = "account_ex_activity", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "extracurricular_activity_id"))
     private List<ExtraCurricularActivity> extra_curricular_activity = new ArrayList<ExtraCurricularActivity>();
@@ -412,5 +415,13 @@ public class Account {
 
     public void setCitizenship(List<Citizenship> citizenship) {
         this.citizenship = citizenship;
+    }
+
+    public Qualification getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(Qualification qualification) {
+        this.qualification = qualification;
     }
 }
