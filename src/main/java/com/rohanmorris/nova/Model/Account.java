@@ -4,6 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
@@ -23,14 +25,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "accounts")
-@SecondaryTable(name = "account_school", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "house_color_account", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "class_room_students", pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
+@SecondaryTable(name = "account_school",        pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
+@SecondaryTable(name = "house_color_account",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
+@SecondaryTable(name = "class_room_students",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", insertable = false, updatable = false)
-    private int account_id;
+    @Column(name = "id")
+    private int acconut_id;
     @JsonIgnore
     private String username;
     @JsonIgnore
@@ -60,28 +62,28 @@ public class Account {
     private HouseColor housecolor;
     @Embedded()
     private ClassRoomStudent classroom;
-    @OneToMany()
-    @JoinColumn(name = "account_id", insertable = false, updatable = false)
-    private List<AccountExtracurricularActivity> account_extracurricular_activity;
+    @OneToMany
+    @JoinTable(name = "account_ex_activity", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "extracurricular_activity_id"))
+    private List<ExtraCurricularActivity> extra_curricular_activity = new ArrayList<ExtraCurricularActivity>();
+    @OneToMany
+    @JoinTable(name = "account_responsibilities", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "responsibilities_id"))
+    private List<Responsibilities> responsibilities = new ArrayList<Responsibilities>();
+    @OneToMany
+    @JoinTable(name = "account_citizenship", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "citizenship_id"))
+    private List<Citizenship> citizenship = new ArrayList<Citizenship>();
 
     public Account() {
         this.setActive(1);
         this.setDate_added();
         this.setPassword("password");
     }
-
-    /**
-     * @return the account_id
-     */
-    public int getAccount_id() {
-        return account_id;
+    
+    public int getAcconut_id() {
+        return acconut_id;
     }
 
-    /**
-     * @param account_id the account_id to set
-     */
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAcconut_id(int acconut_id) {
+        this.acconut_id = acconut_id;
     }
 
     /**
@@ -364,61 +366,51 @@ public class Account {
         this.enrollment_date = enrollment_date;
     }
 
-    /**
-     * @return the accountschool
-     */
     public AccountSchool getAccountschool() {
         return accountschool;
     }
 
-    /**
-     * @param accountschool the accountschool to set
-     */
     public void setAccountschool(AccountSchool accountschool) {
         this.accountschool = accountschool;
     }
 
-    /**
-     * @return the housecolor
-     */
     public HouseColor getHousecolor() {
         return housecolor;
     }
 
-    /**
-     * @param housecolor the housecolor to set
-     */
     public void setHousecolor(HouseColor housecolor) {
         this.housecolor = housecolor;
     }
 
-    /**
-     * @return the classroom
-     */
     public ClassRoomStudent getClassroom() {
         return classroom;
     }
 
-    /**
-     * @param classroom the classroom to set
-     */
     public void setClassroom(ClassRoomStudent classroom) {
         this.classroom = classroom;
     }
 
-    /**
-     * @return the account_extracurricular_activity
-     */
-    public List<AccountExtracurricularActivity> getAccount_extracurricular_activity() {
-        return account_extracurricular_activity;
+    public List<ExtraCurricularActivity> getExtra_curricular_activity() {
+        return extra_curricular_activity;
     }
 
-    /**
-     * @param account_extracurricular_activity the account_extracurricular_activity
-     *                                         to set
-     */
-    public void setAccount_extracurricular_activity(
-            List<AccountExtracurricularActivity> account_extracurricular_activity) {
-        this.account_extracurricular_activity = account_extracurricular_activity;
+    public void setExtra_curricular_activity(List<ExtraCurricularActivity> extra_curricular_activity) {
+        this.extra_curricular_activity = extra_curricular_activity;
+    }
+
+    public List<Responsibilities> getResponsibilities() {
+        return responsibilities;
+    }
+
+    public void setResponsibilities(List<Responsibilities> responsibilities) {
+        this.responsibilities = responsibilities;
+    }
+
+    public List<Citizenship> getCitizenship() {
+        return citizenship;
+    }
+
+    public void setCitizenship(List<Citizenship> citizenship) {
+        this.citizenship = citizenship;
     }
 }

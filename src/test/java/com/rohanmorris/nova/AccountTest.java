@@ -2,10 +2,11 @@ package com.rohanmorris.nova;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.rohanmorris.nova.Model.Account;
-import com.rohanmorris.nova.Model.AccountSchool;
-import com.rohanmorris.nova.Model.ClassRoomStudent;
-import com.rohanmorris.nova.Model.HouseColor;
+import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Service.AccountService;
 
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ public class AccountTest {
         acc.setAccount_type(3);
         acc.setUsername("username");
 
-        AccountSchool accountSchool = new AccountSchool();
+        /*AccountSchool accountSchool = new AccountSchool();
         accountSchool.setSchool_id(1201103719);
         acc.setAccountschool(accountSchool);
 
@@ -53,7 +54,14 @@ public class AccountTest {
 
         ClassRoomStudent classRoomStudent = new ClassRoomStudent();
         classRoomStudent.setClass_room_id(17);
-        acc.setClassroom(classRoomStudent);
+        acc.setClassroom(classRoomStudent);*/
+        List<ExtraCurricularActivity> exList = new ArrayList<>();
+        
+        ExtraCurricularActivity ex = new ExtraCurricularActivity();
+        ex.setId(16);
+        ex.setName("ttt");
+        exList.add(ex);
+        acc.setExtra_curricular_activity(exList);
 
         long id = srv.create(acc);
         assertEquals(id, accId);
