@@ -44,24 +44,19 @@ public class AccountTest {
         acc.setAccount_type(3);
         acc.setUsername("username");
 
-        /*AccountSchool accountSchool = new AccountSchool();
-        accountSchool.setSchool_id(1201103719);
-        acc.setAccountschool(accountSchool);
-
-        HouseColor housecolor = new HouseColor();
-        housecolor.setHouse_color_id(7);
-        acc.setHousecolor(housecolor);
-
-        ClassRoomStudent classRoomStudent = new ClassRoomStudent();
-        classRoomStudent.setClass_room_id(17);
-        acc.setClassroom(classRoomStudent);*/
-        List<ExtraCurricularActivity> exList = new ArrayList<>();
-        
-        ExtraCurricularActivity ex = new ExtraCurricularActivity();
-        ex.setId(16);
-        ex.setName("ttt");
-        exList.add(ex);
-        acc.setExtra_curricular_activity(exList);
+        /*
+         * AccountSchool accountSchool = new AccountSchool();
+         * accountSchool.setSchool_id(1201103719); acc.setAccountschool(accountSchool);
+         * 
+         * HouseColor housecolor = new HouseColor(); housecolor.setHouse_color_id(7);
+         * acc.setHousecolor(housecolor);
+         * 
+         * ClassRoomStudent classRoomStudent = new ClassRoomStudent();
+         * classRoomStudent.setClass_room_id(17); acc.setClassroom(classRoomStudent);
+         * List<ExtraCurricularActivity> exList = new ArrayList<>();
+         * ExtraCurricularActivity ex = new ExtraCurricularActivity(); ex.setId(16);
+         * ex.setName("ttt"); exList.add(ex); acc.setExtra_curricular_activity(exList);
+         */
 
         long id = srv.create(acc);
         assertEquals(id, accId);

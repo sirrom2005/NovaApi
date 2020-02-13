@@ -25,9 +25,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "accounts")
-@SecondaryTable(name = "account_school",        pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "house_color_account",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "class_room_students",   pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
+@SecondaryTable(name = "account_school", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
+@SecondaryTable(name = "house_color_account", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
+@SecondaryTable(name = "class_room_students", pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
 @SecondaryTable(name = "teacher_qualification", pkJoinColumns = @PrimaryKeyJoinColumn(name = "teacher_id"))
 public class Account {
     @Id
@@ -80,7 +80,7 @@ public class Account {
         this.setDate_added();
         this.setPassword("password");
     }
-    
+
     public int getAcconut_id() {
         return acconut_id;
     }
