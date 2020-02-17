@@ -22,18 +22,6 @@ public class StudentService {
         return repo.read();
     }
 
-    public long create(Student student) {
-        return repo.create(student);
-    }
-
-    public Student findById(int id) {
-        return repo.findById(id);
-    }
-
-    public Student update(int id, Student student) {
-        return repo.update(id, student);
-    }
-
     public int delete(int id) {
         return repo.delete(id);
     }

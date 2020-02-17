@@ -28,4 +28,14 @@ public class AccountService implements IAccount {
     public List<Account> read() {
         return repo.read();
     }
+
+    @Override
+    public Account findById(long id) {
+        return repo.findById(id);
+    }
+
+    @Override
+    public Account update(long id, Account account) {
+        return repo.update(id, account);
+    }
 }

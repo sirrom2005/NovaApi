@@ -5,12 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name = "odb_country")
-public class Country {
+@Table(name = "odb_class_rooms")
+public class ClassRoom {
     @Id
-    @Column(name = "country_id")
     public int id;
+    @JsonIgnore
+    private int school_id;
+    @Column(name = "class_name")
     public String name;
 
     /**
@@ -39,5 +43,19 @@ public class Country {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the school_id
+     */
+    public int getSchool_id() {
+        return school_id;
+    }
+
+    /**
+     * @param school_id the school_id to set
+     */
+    public void setSchool_id(int school_id) {
+        this.school_id = school_id;
     }
 }

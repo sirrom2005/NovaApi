@@ -29,22 +29,9 @@ public class StudentController {
         return srv.read();
     }
 
-    @GetMapping("{id}")
-    public Student findById(@PathVariable("id") int id) {
-        return srv.findById(id);
-    }
-
-    /*
-     * @PostMapping() public int create(@Valid @RequestBody Student student) {
-     * return srv.create(student); }
-     * 
-     * @PutMapping("{id}") public Student update(@PathVariable("id") int
-     * id, @RequestBody Student student) { return srv.update(id, student); }
-     */
-
     @DeleteMapping("{id}")
     public int delete(@PathVariable("id") int id) {
-        return srv.delete(id);
+        return 0;
     }
 
     @GetMapping("count")

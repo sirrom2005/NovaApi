@@ -3,7 +3,6 @@ package com.rohanmorris.nova.Repo;
 import com.rohanmorris.nova.Interface.IStudent;
 import com.rohanmorris.nova.Model.Student;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,20 +24,8 @@ public class StudentRepo implements IStudent {
         return this.sessionFactory.getCurrentSession();
     }
 
-    private List<Student> list = new ArrayList<>();
-
     public StudentRepo(SessionFactory sf) {
         this.sessionFactory = sf;
-    }
-
-    @Override
-    public long create(Student student) {
-        Object id = getDbSession().save(student);
-
-        if (id != null) {
-            return Long.parseLong(String.valueOf(id));
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -75,11 +62,6 @@ public class StudentRepo implements IStudent {
         }
 
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    }
-
-    @Override
-    public Student update(int id, Student student) {
-        return list.set(id, student);
     }
 
     @Override

@@ -29,7 +29,6 @@ public class AccountRepo implements IAccount {
 
     @Override
     public long create(Account account) {
-
         Session session = getDbSession();
         String fname = account.getFirstname().trim().equals("") ? "A"
                 : account.getFirstname().replaceAll("[^A-Za-z]+", "").substring(0, 1).toLowerCase();
@@ -51,6 +50,26 @@ public class AccountRepo implements IAccount {
     @Override
     public List<Account> read() {
         List<Account> info = getDbSession().createQuery("FROM Account").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Account update(long id, Account account) {
+        account.setAcconut_id(id);
+        Account info = (Account) getDbSession().merge(account);
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public Account findById(long id) {
+        Account info = (Account) getDbSession().createQuery("FROM Account WHERE acconut_id = :id")
+                .setParameter("id", id).uniqueResult();
         if (info != null) {
             return info;
         }

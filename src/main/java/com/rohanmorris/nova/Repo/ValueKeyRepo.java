@@ -3,7 +3,10 @@ package com.rohanmorris.nova.Repo;
 import java.util.List;
 
 import com.rohanmorris.nova.Interface.IValueKeyObject;
+import com.rohanmorris.nova.Model.ClassRoom;
+import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
+import com.rohanmorris.nova.Model.HouseColor;
 import com.rohanmorris.nova.Model.Responsibilities;
 
 import org.hibernate.Session;
@@ -38,6 +41,35 @@ public class ValueKeyRepo implements IValueKeyObject {
     @Override
     public List<Responsibilities> responsibilities() {
         List<Responsibilities> info = getDbSession().createQuery("FROM Responsibilities").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<Country> countryList() {
+        List<Country> info = getDbSession().createQuery("FROM Country").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<ClassRoom> classList(int schoolId) {
+        List<ClassRoom> info = getDbSession().createQuery("FROM ClassRoom WHERE school_id = :id")
+                .setParameter("id", schoolId).list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<HouseColor> houseColor(int schoolId) {
+        List<HouseColor> info = getDbSession().createQuery("FROM HouseColor WHERE school_id = :id")
+                .setParameter("id", schoolId).list();
         if (info != null) {
             return info;
         }

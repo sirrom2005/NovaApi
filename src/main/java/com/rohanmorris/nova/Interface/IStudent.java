@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface IStudent {
-    public long create(Student student);
 
     public HashMap<String, List<Student>> read();
-
-    public Student update(int id, Student student);
 
     public int delete(int id);
 

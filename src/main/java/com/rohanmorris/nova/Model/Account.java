@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
@@ -26,14 +27,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "accounts")
 @SecondaryTable(name = "account_school", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "house_color_account", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
+// @SecondaryTable(name = "house_color_account", pkJoinColumns =
+// @PrimaryKeyJoinColumn(name = "account_id"))
 @SecondaryTable(name = "class_room_students", pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
 @SecondaryTable(name = "teacher_qualification", pkJoinColumns = @PrimaryKeyJoinColumn(name = "teacher_id"))
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int acconut_id;
+    private long acconut_id;
     @JsonIgnore
     private String username;
     @JsonIgnore
@@ -60,11 +62,12 @@ public class Account {
     @Embedded()
     private AccountSchool accountschool;
     @Embedded()
-    private HouseColor housecolor;
-    @Embedded()
     private ClassRoomStudent classroom;
     @Embedded()
     private Qualification qualification;
+    @OneToOne
+    @JoinTable(name = "house_color_account", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "house_color_id"))
+    private HouseColor housecolor;
     @OneToMany
     @JoinTable(name = "account_ex_activity", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "extracurricular_activity_id"))
     private List<ExtraCurricularActivity> extra_curricular_activity = new ArrayList<ExtraCurricularActivity>();
@@ -81,11 +84,11 @@ public class Account {
         this.setPassword("password");
     }
 
-    public int getAcconut_id() {
+    public long getAcconut_id() {
         return acconut_id;
     }
 
-    public void setAcconut_id(int acconut_id) {
+    public void setAcconut_id(long acconut_id) {
         this.acconut_id = acconut_id;
     }
 
