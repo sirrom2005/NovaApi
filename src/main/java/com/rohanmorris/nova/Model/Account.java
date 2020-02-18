@@ -373,7 +373,7 @@ public class Account {
     }
 
     public AccountSchool getAccountschool() {
-        return accountschool;
+        return accountschool==null ? new AccountSchool() : accountschool;
     }
 
     public void setAccountschool(AccountSchool accountschool) {
@@ -381,7 +381,7 @@ public class Account {
     }
 
     public HouseColor getHousecolor() {
-        return housecolor;
+        return housecolor==null ? new HouseColor() : housecolor;
     }
 
     public void setHousecolor(HouseColor housecolor) {
@@ -389,7 +389,7 @@ public class Account {
     }
 
     public ClassRoomStudent getClassroom() {
-        return classroom;
+        return classroom==null ? new ClassRoomStudent() : classroom;
     }
 
     public void setClassroom(ClassRoomStudent classroom) {
@@ -421,7 +421,7 @@ public class Account {
     }
 
     public Qualification getQualification() {
-        return qualification;
+        return qualification==null ? new Qualification() : qualification;
     }
 
     public void setQualification(Qualification qualification) {

@@ -11,6 +11,7 @@ public class CountryState {
     @Id
     @Column(name = "zone_id")
     private int  state_id;
+    private int country_id;
     private String name;
 
     public int getState_id() {
@@ -27,5 +28,13 @@ public class CountryState {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getCountry_id() {
+        return country_id;
+    }
+
+    public void setCountry_id(int country_id) {
+        this.country_id = country_id;
     }
 }

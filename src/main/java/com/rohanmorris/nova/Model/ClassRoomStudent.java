@@ -6,7 +6,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ClassRoomStudent {
 
-    @Column(name = "class_room_id", table = "class_room_students")
+    @Column(name = "class_room_id", nullable = false, table = "class_room_students")
     private int class_room_id;
 
     /**
