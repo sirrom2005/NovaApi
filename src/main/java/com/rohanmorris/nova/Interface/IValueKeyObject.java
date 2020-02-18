@@ -1,12 +1,13 @@
 package com.rohanmorris.nova.Interface;
 
-import java.util.List;
-
+import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
 import com.rohanmorris.nova.Model.Responsibilities;
+import java.util.List;
+
 
 /**
  * IValueKeyObject
@@ -22,4 +23,6 @@ public interface IValueKeyObject {
     public List<ClassRoom> classList(int schoolId);
 
     public List<HouseColor> houseColor(int schoolId);
+
+    public List<Citizenship> schoolCitizenship();
 }

@@ -1,16 +1,17 @@
 package com.rohanmorris.nova.Service;
 
-import java.util.List;
-
 import com.rohanmorris.nova.Interface.IValueKeyObject;
+import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
 import com.rohanmorris.nova.Model.Responsibilities;
 import com.rohanmorris.nova.Repo.ValueKeyRepo;
-
+import java.util.List;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 public class ValueKeySevice implements IValueKeyObject {
@@ -43,5 +44,10 @@ public class ValueKeySevice implements IValueKeyObject {
     @Override
     public List<HouseColor> houseColor(int schoolId) {
         return repo.houseColor(schoolId);
+    }
+
+    @Override
+    public List<Citizenship> schoolCitizenship() {
+        return repo.schoolCitizenship();
     }
 }
