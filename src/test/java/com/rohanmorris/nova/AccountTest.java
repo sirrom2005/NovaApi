@@ -8,7 +8,7 @@ import java.util.List;
 
 import com.rohanmorris.nova.Model.Account;
 import com.rohanmorris.nova.Model.AccountSchool;
-import com.rohanmorris.nova.Model.ClassRoomStudent;
+import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Service.AccountService;
 
 import org.junit.jupiter.api.Test;
@@ -26,8 +26,7 @@ public class AccountTest {
     }
 
     @Test
-    void accountSaveTests() {
-
+    void accountCreateTests() {
         Account acc = new Account();
         acc.setFirstname(" Fname ");
         acc.setMiddlename("Middlename");
@@ -53,8 +52,8 @@ public class AccountTest {
         // housecolor.setHouse_color_id(7);
         // acc.setHousecolor(housecolor);
 
-        ClassRoomStudent classRoomStudent = new ClassRoomStudent();
-        classRoomStudent.setClass_room_id(17);
+        ClassRoom classRoomStudent = new ClassRoom();
+        classRoomStudent.setId(17);
         acc.setClassroom(classRoomStudent);
 
         List<ExtraCurricularActivity> exList = new ArrayList<>();
@@ -72,7 +71,6 @@ public class AccountTest {
 
     @Test
     void accountUpdateTests() {
-
         Account acc = new Account();
         acc.setFirstname("update");
         acc.setMiddlename("update");
@@ -94,8 +92,8 @@ public class AccountTest {
         // housecolor.setHouse_color_id(3);
         // acc.setHousecolor(housecolor);
 
-        ClassRoomStudent classRoomStudent = new ClassRoomStudent();
-        classRoomStudent.setClass_room_id(3);
+        ClassRoom classRoomStudent = new ClassRoom();
+        classRoomStudent.setId(3);
         acc.setClassroom(classRoomStudent);
 
         List<ExtraCurricularActivity> exList = new ArrayList<>();

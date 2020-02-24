@@ -27,9 +27,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "accounts")
 @SecondaryTable(name = "account_school", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
-// @SecondaryTable(name = "house_color_account", pkJoinColumns =
-// @PrimaryKeyJoinColumn(name = "account_id"))
-@SecondaryTable(name = "class_room_students", pkJoinColumns = @PrimaryKeyJoinColumn(name = "student_id"))
 @SecondaryTable(name = "teacher_qualification", pkJoinColumns = @PrimaryKeyJoinColumn(name = "teacher_id"))
 public class Account {
     @Id
@@ -61,8 +58,9 @@ public class Account {
     private String date_added;
     @Embedded()
     private AccountSchool accountschool;
-    @Embedded()
-    private ClassRoomStudent classroom;
+    @OneToOne
+    @JoinTable(name = "class_room_students", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "class_room_id"))
+    private ClassRoom classroom;
     @Embedded()
     private Qualification qualification;
     @OneToOne
@@ -388,14 +386,6 @@ public class Account {
         this.housecolor = housecolor;
     }
 
-    public ClassRoomStudent getClassroom() {
-        return classroom==null ? new ClassRoomStudent() : classroom;
-    }
-
-    public void setClassroom(ClassRoomStudent classroom) {
-        this.classroom = classroom;
-    }
-
     public List<ExtraCurricularActivity> getExtra_curricular_activity() {
         return extra_curricular_activity;
     }
@@ -426,5 +416,13 @@ public class Account {
 
     public void setQualification(Qualification qualification) {
         this.qualification = qualification;
+    }
+
+    public ClassRoom getClassroom() {
+        return classroom==null ? new ClassRoom() : classroom;
+    }
+
+    public void setClassroom(ClassRoom classroom) {
+        this.classroom = classroom;
     }
 }
