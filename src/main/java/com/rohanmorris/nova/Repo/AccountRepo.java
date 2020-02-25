@@ -9,6 +9,7 @@ import com.rohanmorris.nova.Model.Account;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.LongType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
@@ -69,7 +70,7 @@ public class AccountRepo implements IAccount {
     @Override
     public Account findById(long id) {
         Account info = (Account) getDbSession().createQuery("FROM Account WHERE acconut_id = :id")
-                .setParameter("id", id).uniqueResult();
+                .setParameter("id", id, LongType.INSTANCE).uniqueResult();
         if (info != null) {
             return info;
         }

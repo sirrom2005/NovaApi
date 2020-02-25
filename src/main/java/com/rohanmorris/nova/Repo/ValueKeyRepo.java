@@ -10,11 +10,10 @@ import com.rohanmorris.nova.Model.Responsibilities;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.LongType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.server.ResponseStatusException;
-
-
 
 @SuppressWarnings("unchecked")
 @Repository
@@ -58,9 +57,9 @@ public class ValueKeyRepo implements IValueKeyObject {
     }
 
     @Override
-    public List<ClassRoom> classList(int schoolId) {
+    public List<ClassRoom> classList(long schoolId) {
         List<ClassRoom> info = getDbSession().createQuery("FROM ClassRoom WHERE school_id = :id")
-                .setParameter("id", schoolId).list();
+                .setParameter("id", schoolId, LongType.INSTANCE).list();
         if (info != null) {
             return info;
         }
@@ -68,9 +67,9 @@ public class ValueKeyRepo implements IValueKeyObject {
     }
 
     @Override
-    public List<HouseColor> houseColor(int schoolId) {
+    public List<HouseColor> houseColor(long schoolId) {
         List<HouseColor> info = getDbSession().createQuery("FROM HouseColor WHERE school_id = :id")
-                .setParameter("id", schoolId).list();
+                .setParameter("id", schoolId, LongType.INSTANCE).list();
         if (info != null) {
             return info;
         }

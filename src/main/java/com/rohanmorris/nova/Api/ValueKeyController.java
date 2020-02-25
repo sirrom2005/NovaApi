@@ -49,13 +49,13 @@ public class ValueKeyController implements IValueKeyObject {
 
     @GetMapping("class/{schoolid}")
     @Override
-    public List<ClassRoom> classList(@PathVariable("schoolid") int schoolid) {
-        return srv.classList(schoolid);
+    public List<ClassRoom> classList(@PathVariable("schoolid") long schoolId) {
+        return srv.classList(schoolId);
     }
 
     @GetMapping("housecolor/{schoolid}")
     @Override
-    public List<HouseColor> houseColor(@PathVariable("schoolid") int schoolid) {
+    public List<HouseColor> houseColor(@PathVariable("schoolid") long schoolid) {
         return srv.houseColor(schoolid);
     }
 

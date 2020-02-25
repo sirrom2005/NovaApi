@@ -20,9 +20,9 @@ public interface IValueKeyObject {
 
     public List<Country> countryList();
 
-    public List<ClassRoom> classList(int schoolId);
+    public List<ClassRoom> classList(long schoolId);
 
-    public List<HouseColor> houseColor(int schoolId);
+    public List<HouseColor> houseColor(long schoolId);
 
     public List<Citizenship> schoolCitizenship();
 }

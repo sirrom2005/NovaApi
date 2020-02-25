@@ -37,12 +37,12 @@ public class ValueKeySevice implements IValueKeyObject {
     }
 
     @Override
-    public List<ClassRoom> classList(int schoolId) {
+    public List<ClassRoom> classList(long schoolId) {
         return repo.classList(schoolId);
     }
 
     @Override
-    public List<HouseColor> houseColor(int schoolId) {
+    public List<HouseColor> houseColor(long schoolId) {
         return repo.houseColor(schoolId);
     }
 
