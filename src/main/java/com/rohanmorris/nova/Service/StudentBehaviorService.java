@@ -36,4 +36,9 @@ public class StudentBehaviorService implements IStudentBehavior {
     public List<StudentBehavior> findByStudentId(long id) {
         return repo.findByStudentId(id);
     }
+
+    @Override
+    public long delete(long id) {
+        return repo.delete(id);
+    }
 }

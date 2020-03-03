@@ -10,6 +10,8 @@ public interface IStudentBehavior
 
     public StudentBehavior update(long id, StudentBehavior studentBehavior);
 
+    public long delete(long id);
+
     public StudentBehavior findById(long id);
 
     public List<StudentBehavior> findByStudentId(long id);

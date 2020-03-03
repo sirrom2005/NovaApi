@@ -9,7 +9,6 @@ import com.rohanmorris.nova.Model.StudentBehavior;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
@@ -78,6 +77,17 @@ public class StudentBehaviorRepo implements IStudentBehavior {
         if (info != null) {
             return info;
         }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public long delete(long id) {
+        long rs = getDbSession().createSQLQuery("DELETE FROM student_conduct_behavior WHERE id = :id")
+        .setParameter("id", id, LongType.INSTANCE).executeUpdate();
+        if (rs > 0) {
+            return rs;
+        }
+
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 }
