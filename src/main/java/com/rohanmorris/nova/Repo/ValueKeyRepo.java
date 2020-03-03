@@ -3,6 +3,7 @@ package com.rohanmorris.nova.Repo;
 import com.rohanmorris.nova.Interface.IValueKeyObject;
 import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
+import com.rohanmorris.nova.Model.Conduct;
 import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
@@ -79,6 +80,15 @@ public class ValueKeyRepo implements IValueKeyObject {
     @Override
     public List<Citizenship> schoolCitizenship() {
         List<Citizenship> info = getDbSession().createQuery("FROM Citizenship").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<Conduct> conductList() {
+        List<Conduct> info = getDbSession().createQuery("FROM Conduct").list();
         if (info != null) {
             return info;
         }

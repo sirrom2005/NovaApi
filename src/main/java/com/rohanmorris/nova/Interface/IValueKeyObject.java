@@ -2,6 +2,7 @@ package com.rohanmorris.nova.Interface;
 
 import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
+import com.rohanmorris.nova.Model.Conduct;
 import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
@@ -25,4 +26,6 @@ public interface IValueKeyObject {
     public List<HouseColor> houseColor(long schoolId);
 
     public List<Citizenship> schoolCitizenship();
+
+    public List<Conduct> conductList();
 }

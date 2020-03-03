@@ -18,19 +18,13 @@ public class StudentBehaviorService implements IStudentBehavior {
     
     @Override
     public long create(StudentBehavior studentBehavior) {
-        // TODO Auto-generated method stub
-        return 0;
+        return repo.create(studentBehavior);
     }
 
     @Override
     public StudentBehavior update(long id, StudentBehavior studentBehavior) {
         // TODO Auto-generated method stub
         return null;
-    }
-
-    @Override
-    public List<StudentBehavior> read() {
-        return repo.read();
     }
 
     @Override

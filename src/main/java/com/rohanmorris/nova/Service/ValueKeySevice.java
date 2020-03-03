@@ -3,6 +3,7 @@ package com.rohanmorris.nova.Service;
 import com.rohanmorris.nova.Interface.IValueKeyObject;
 import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
+import com.rohanmorris.nova.Model.Conduct;
 import com.rohanmorris.nova.Model.Country;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
@@ -49,5 +50,10 @@ public class ValueKeySevice implements IValueKeyObject {
     @Override
     public List<Citizenship> schoolCitizenship() {
         return repo.schoolCitizenship();
+    }
+
+    @Override
+    public List<Conduct> conductList() {
+        return repo.conductList();
     }
 }

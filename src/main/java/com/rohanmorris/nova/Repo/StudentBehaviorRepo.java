@@ -31,8 +31,13 @@ public class StudentBehaviorRepo implements IStudentBehavior {
 
     @Override
     public long create(StudentBehavior studentBehavior) {
-        // TODO Auto-generated method stub
-        return 0;
+        Session session = getDbSession();
+        Object id = session.save(studentBehavior);
+
+        if (id != null) {
+            return Long.parseLong(String.valueOf(id));
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
     @Override
@@ -41,7 +46,7 @@ public class StudentBehaviorRepo implements IStudentBehavior {
         return null;
     }
 
-    @SuppressWarnings("unchecked")
+    /*@SuppressWarnings("unchecked")
     @Override
     public List<StudentBehavior> read() {
         List<StudentBehavior> info = getDbSession().createQuery("FROM StudentBehavior").list();
@@ -49,12 +54,13 @@ public class StudentBehaviorRepo implements IStudentBehavior {
             return info;
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    }
+    }*/
 
     @Override
     public StudentBehavior findById(long id) {
         StudentBehavior info = (StudentBehavior) getDbSession()
-                .createQuery("FROM StudentBehavior WHERE student_id = :id").setParameter("id", id, LongType.INSTANCE)
+                .createQuery("FROM StudentBehavior WHERE id = :id")
+                .setParameter("id", id, LongType.INSTANCE)
                 .uniqueResult();
         if (info != null) {
             return info;
@@ -67,7 +73,8 @@ public class StudentBehaviorRepo implements IStudentBehavior {
     public List<StudentBehavior> findByStudentId(long id) {
         List<StudentBehavior> info = getDbSession()
                 .createQuery("FROM StudentBehavior WHERE student_id = :student_id")
-                .setParameter("student_id", id, LongType.INSTANCE).list();
+                .setParameter("student_id", id, LongType.INSTANCE)
+                .list();
         if (info != null) {
             return info;
         }
