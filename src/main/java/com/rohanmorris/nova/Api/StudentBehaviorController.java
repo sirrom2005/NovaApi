@@ -8,6 +8,7 @@ import com.rohanmorris.nova.Model.StudentBehavior;
 import com.rohanmorris.nova.Service.StudentBehaviorService;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,5 +39,10 @@ public class StudentBehaviorController{
     @GetMapping("student/{id}")
     public List<StudentBehavior> student(@PathVariable("id") long id) {
         return srv.findByStudentId(id);
+    }
+
+    @DeleteMapping("{id}")
+    public long delete(@PathVariable("id") long id) {
+        return srv.delete(id);
     }
 }
