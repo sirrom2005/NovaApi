@@ -2,20 +2,11 @@ package com.rohanmorris.nova.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedStoredProcedureQueries;
-import javax.persistence.NamedStoredProcedureQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "subjects")
-@NamedStoredProcedureQueries({
-    @NamedStoredProcedureQuery(
-        name = "getSubjectsSp",
-        procedureName = "get_subject",
-        resultClasses = {Subject.class}
-    )
-})
-public class Subject {
+@Table(name = "examination_duration")
+public class ExaminationDuration {
     @Id
     private int id;
     private String name;

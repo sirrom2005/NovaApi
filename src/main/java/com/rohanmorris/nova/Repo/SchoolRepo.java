@@ -5,6 +5,8 @@ import java.util.List;
 import javax.transaction.Transactional;
 import com.rohanmorris.nova.Interface.ISchool;
 import com.rohanmorris.nova.Model.School;
+import com.rohanmorris.nova.Model.Subject;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.type.IntegerType;
@@ -17,13 +19,15 @@ import org.springframework.web.server.ResponseStatusException;
 public class SchoolRepo implements ISchool {
 
     private SessionFactory sessionFactory;
+    private Sp _repo;
 
     public Session getDbSession() {
         return this.sessionFactory.getCurrentSession();
     }
 
-    public SchoolRepo(SessionFactory sf) {
+    public SchoolRepo(SessionFactory sf, Sp s) {
         this.sessionFactory = sf;
+        this._repo = s;
     }
 
     @Override
@@ -64,4 +68,9 @@ public class SchoolRepo implements ISchool {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    //@SuppressWarnings("unchecked")
+    public List<Subject> getSubjectSp() {
+        return _repo.getSubjectSpX();
+        //return getDbSession().createNamedStoredProcedureQuery("getSubjectsSp").getResultList();
+    }
 }

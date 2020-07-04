@@ -3,6 +3,7 @@ package com.rohanmorris.nova.Service;
 import java.util.List;
 
 import com.rohanmorris.nova.Model.School;
+import com.rohanmorris.nova.Model.Subject;
 import com.rohanmorris.nova.Repo.SchoolRepo;
 import org.springframework.stereotype.Service;
 
@@ -24,5 +25,9 @@ public class SchoolService {
 
     public List<School> read() {
         return repo.read();
+    }
+
+    public List<Subject> getSubjectSp() {
+        return repo.getSubjectSp();
     }
 }

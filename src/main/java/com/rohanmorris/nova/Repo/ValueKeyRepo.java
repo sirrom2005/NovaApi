@@ -5,9 +5,13 @@ import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Model.Conduct;
 import com.rohanmorris.nova.Model.Country;
+import com.rohanmorris.nova.Model.ExaminationDuration;
+import com.rohanmorris.nova.Model.ExaminationType;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
 import com.rohanmorris.nova.Model.Responsibilities;
+import com.rohanmorris.nova.Model.Subject;
+
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -89,6 +93,33 @@ public class ValueKeyRepo implements IValueKeyObject {
     @Override
     public List<Conduct> conductList() {
         List<Conduct> info = getDbSession().createQuery("FROM Conduct").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<ExaminationType> examinationTypeList() {
+        List<ExaminationType> info = getDbSession().createQuery("FROM ExaminationType").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<Subject> subjectList() {
+        List<Subject> info = getDbSession().createQuery("FROM Subject").list();
+        if (info != null) {
+            return info;
+        }
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public List<ExaminationDuration> durationList() {
+        List<ExaminationDuration> info = getDbSession().createQuery("FROM ExaminationDuration").list();
         if (info != null) {
             return info;
         }

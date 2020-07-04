@@ -5,14 +5,15 @@ import com.rohanmorris.nova.Model.Citizenship;
 import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Model.Conduct;
 import com.rohanmorris.nova.Model.Country;
+import com.rohanmorris.nova.Model.ExaminationDuration;
+import com.rohanmorris.nova.Model.ExaminationType;
 import com.rohanmorris.nova.Model.ExtraCurricularActivity;
 import com.rohanmorris.nova.Model.HouseColor;
 import com.rohanmorris.nova.Model.Responsibilities;
+import com.rohanmorris.nova.Model.Subject;
 import com.rohanmorris.nova.Repo.ValueKeyRepo;
 import java.util.List;
 import org.springframework.stereotype.Service;
-
-
 
 @Service
 public class ValueKeySevice implements IValueKeyObject {
@@ -55,5 +56,20 @@ public class ValueKeySevice implements IValueKeyObject {
     @Override
     public List<Conduct> conductList() {
         return repo.conductList();
+    }
+
+    @Override
+    public List<ExaminationType> examinationTypeList() {
+        return repo.examinationTypeList();
+    }
+
+    @Override
+    public List<Subject> subjectList() {
+        return repo.subjectList();
+    }
+
+    @Override
+    public List<ExaminationDuration> durationList() {
+        return repo.durationList();
     }
 }

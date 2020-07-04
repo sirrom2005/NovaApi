@@ -3,6 +3,7 @@ package com.rohanmorris.nova.Api;
 import java.util.List;
 
 import com.rohanmorris.nova.Model.School;
+import com.rohanmorris.nova.Model.Subject;
 import com.rohanmorris.nova.Service.SchoolService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,5 +32,10 @@ public class SchoolController {
     @GetMapping("{id}")
     public School name(@PathVariable("id") int id) {
         return srv.findById(id);
+    }
+
+    @GetMapping("/subects")
+    public List<Subject> getSubect() {
+        return srv.getSubjectSp();
     }
 }

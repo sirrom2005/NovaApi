@@ -9,7 +9,6 @@ import com.rohanmorris.nova.Model.StudentBehavior;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.type.IntegerType;
 import org.hibernate.type.LongType;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
