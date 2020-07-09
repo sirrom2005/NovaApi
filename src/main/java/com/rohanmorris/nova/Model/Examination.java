@@ -1,14 +1,18 @@
 package com.rohanmorris.nova.Model;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "examination")
@@ -31,16 +35,24 @@ public class Examination {
     @JoinColumn(name = "subject_id")
     private Subject subject;
     private long created_by;
+    @JsonIgnore
+    @Column(updatable = false)
     private String date_added;
     private String date_updated;
+    private String exam_date;
+    private String exam_expire_date;
 
-     /**
-     * 
-     */
-    public Examination(){}
+    /**
+    * 
+    */
+    public Examination() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateobj = new Date();
+        setDate_added(df.format(dateobj));
+        setDate_updated(df.format(dateobj));
+    }
 
-
-        /**
+    /**
      * @param id
      * @param name
      * @param exam_type
@@ -49,7 +61,8 @@ public class Examination {
      * @param subject
      * @param date_updated
      */
-    public Examination(long id, String name, ExaminationType exam_type, ExaminationDuration duration, int allow_retry, Subject subject, String date_updated) {
+    public Examination(long id, String name, ExaminationType exam_type, ExaminationDuration duration, int allow_retry,
+            Subject subject, String date_updated) {
         this.id = id;
         this.name = name;
         this.exam_type = exam_type;
@@ -175,25 +188,29 @@ public class Examination {
      * @param date_added the date_added to set
      */
     public void setDate_added(String date_added) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dateobj = new Date();
-        this.date_added = df.format(dateobj);
+        this.date_added = date_added;
     }
 
     /**
      * @return the date_updated
      */
     public String getDate_updated() {
-        return date_updated;
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
+        try {
+            date = dt.parse(date_updated);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat dt1 = new SimpleDateFormat("dd MMMM, yyyy 'at' h:mm:ss a");
+        return dt1.format(date);
     }
 
     /**
      * @param date_updated the date_updated to set
      */
     public void setDate_updated(String date_updated) {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dateobj = new Date();
-        this.date_updated = df.format(dateobj);
+        this.date_updated = date_updated;
     }
 
     /**
@@ -243,5 +260,33 @@ public class Examination {
      */
     public void setCreated_by(long created_by) {
         this.created_by = created_by;
+    }
+
+    /**
+     * @return the exam_date
+     */
+    public String getExam_date() {
+        return exam_date;
+    }
+
+    /**
+     * @param exam_date the exam_date to set
+     */
+    public void setExam_date(String exam_date) {
+        this.exam_date = exam_date;
+    }
+
+    /**
+     * @return the exam_expire_date
+     */
+    public String getExam_expire_date() {
+        return exam_expire_date;
+    }
+
+    /**
+     * @param exam_expire_date the exam_expire_date to set
+     */
+    public void setExam_expire_date(String exam_expire_date) {
+        this.exam_expire_date = exam_expire_date;
     }
 }
