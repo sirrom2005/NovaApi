@@ -1,5 +1,6 @@
 package com.rohanmorris.nova.Api;
 
+import io.swagger.annotations.Authorization;
 import java.util.Optional;
 import javax.validation.Valid;
 
@@ -13,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("api/v1/examination")
 @RestController
+@ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
 public class ExaminationController {
     private ExamaminationService srv;
 

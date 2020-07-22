@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,6 +31,8 @@ public class ExaminationReport {
     private String logo;
     private String motto;
     private String class_room;
+    private String form_teacher;
+    private String house_color;
     @OneToMany()
     @JoinColumn(name = "student_id")
     private List<ExaminationGrade> examination_grade = new ArrayList<ExaminationGrade>();;
@@ -258,5 +259,33 @@ public class ExaminationReport {
      */
     public void setExamination_grade(List<ExaminationGrade> examination_grade) {
         this.examination_grade = examination_grade;
+    }
+
+    /**
+     * @return the form_teacher
+     */
+    public String getForm_teacher() {
+        return form_teacher;
+    }
+
+    /**
+     * @param form_teacher the form_teacher to set
+     */
+    public void setForm_teacher(String form_teacher) {
+        this.form_teacher = form_teacher;
+    }
+
+    /**
+     * @return the house_color
+     */
+    public String getHouse_color() {
+        return house_color;
+    }
+
+    /**
+     * @param house_color the house_color to set
+     */
+    public void setHouse_color(String house_color) {
+        this.house_color = house_color;
     }
 }
