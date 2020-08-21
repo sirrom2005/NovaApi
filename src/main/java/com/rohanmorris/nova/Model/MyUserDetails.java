@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserDetails implements UserDetails 
 {
+    private long id;
+    private String fullname;
     private String username;
     private String password;
     private boolean active;
@@ -20,10 +22,12 @@ public class MyUserDetails implements UserDetails
     }
 
     public MyUserDetails(User user) {
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.active   = user.getActive()==1 ? true : false;
-        this.authority = Arrays.stream(user.getRole().split(","))
+        this.fullname   = user.getFullname();
+        this.id         = user.getId();
+        this.username   = user.getUsername();
+        this.password   = user.getPassword();
+        this.active     = user.getActive()==1 ? true : false;
+        this.authority  = Arrays.stream(user.getRole().split(","))
                                 .map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toList());                  
 	}
@@ -61,5 +65,13 @@ public class MyUserDetails implements UserDetails
     @Override
     public boolean isEnabled() {
         return active;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getFullname() {
+        return fullname;
     }
 }

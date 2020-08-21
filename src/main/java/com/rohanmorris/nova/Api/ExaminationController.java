@@ -1,25 +1,26 @@
 package com.rohanmorris.nova.Api;
 
-import io.swagger.annotations.Authorization;
 import java.util.Optional;
 import javax.validation.Valid;
 
 import com.rohanmorris.nova.Model.Examination;
 import com.rohanmorris.nova.Service.ExamaminationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("api/v1/examination")
 @RestController
-@ApiOperation(value = "", authorizations = { @Authorization(value="jwtToken") })
 public class ExaminationController {
     private ExamaminationService srv;
 
@@ -30,9 +31,9 @@ public class ExaminationController {
         this.srv = srv;
     }
 
-    @GetMapping()
-    public Iterable<Examination> examList() {
-        return srv.examList();
+    @GetMapping("/list/{id}")
+    public Iterable<Examination> examList(@PathVariable("id") long id) {
+        return srv.examList(id);
     }
 
     @GetMapping("{id}")
@@ -43,5 +44,11 @@ public class ExaminationController {
     @PostMapping()
     public Examination create(@Valid @RequestBody Examination exam) {
         return srv.create(exam);
+    }
+
+    @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void delete(@PathVariable("id") long id) {
+        srv.deleteById(id);
     }
 }

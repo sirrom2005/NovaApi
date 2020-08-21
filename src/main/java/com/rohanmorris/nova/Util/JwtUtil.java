@@ -19,7 +19,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
     @Value("${api.serect.key}")
     private String PRIVATE_KEY;
-    private long ExpirationTime = 1000 * 60 * 60;
+    private long ExpirationTime = (1000 * 60) * 60;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -48,8 +48,6 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        System.out.println(PRIVATE_KEY);
-
         return Jwts.builder()
                     .setClaims(claims)
                     .setSubject(subject)

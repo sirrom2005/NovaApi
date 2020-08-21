@@ -1,6 +1,7 @@
 package com.rohanmorris.nova.Api;
 
 import com.rohanmorris.nova.Model.AuthenticationRequest;
+import com.rohanmorris.nova.Model.MyUserDetails;
 import com.rohanmorris.nova.Service.MyUserDetailsService;
 import com.rohanmorris.nova.Util.AuthenticationResponse;
 import com.rohanmorris.nova.Util.JwtUtil;
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,8 +36,9 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", e);
         }
         
-        final UserDetails userDetails = myUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final MyUserDetails userDetails = (MyUserDetails) myUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtTokenUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        
+        return ResponseEntity.ok(new AuthenticationResponse(userDetails.getId(), userDetails.getFullname(), jwt));
     }
 }
