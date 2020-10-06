@@ -15,6 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "exams_results")
 public class ExamGrade {
     @Id
+    @JsonIgnore
+    @Column(insertable = false, updatable = false)
+    private long id;
     private long exam_id;
     private long student_id;
     private float grade;
@@ -31,6 +34,20 @@ public class ExamGrade {
         Date dateobj = new Date();
         setDate_added(df.format(dateobj));
         setDate_updated(df.format(dateobj));
+    }
+
+    /**
+     * @return the id
+     */
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**

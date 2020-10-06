@@ -8,7 +8,6 @@ import java.util.List;
 
 import com.rohanmorris.nova.Model.Account;
 import com.rohanmorris.nova.Model.AccountSchool;
-import com.rohanmorris.nova.Model.ClassRoom;
 import com.rohanmorris.nova.Service.AccountService;
 
 import org.junit.jupiter.api.Test;
@@ -42,8 +41,7 @@ public class AccountTest {
         acc.setGender("M");
         acc.setDob("1980-10-10");
         acc.setAccount_type(3);
-        acc.setUsername("username");
-
+      
         AccountSchool accountSchool = new AccountSchool();
         accountSchool.setSchool_id(1201103719);
         acc.setAccountschool(accountSchool);
@@ -52,9 +50,9 @@ public class AccountTest {
         // housecolor.setHouse_color_id(7);
         // acc.setHousecolor(housecolor);
 
-        ClassRoom classRoomStudent = new ClassRoom();
-        classRoomStudent.setId(17);
-        acc.setClassroom(classRoomStudent);
+        //ClassRoom classRoomStudent = new ClassRoom();
+        //classRoomStudent.setId(17);
+        //acc.setClassroom(classRoomStudent);
 
         List<ExtraCurricularActivity> exList = new ArrayList<>();
         ExtraCurricularActivity ex1 = new ExtraCurricularActivity();
@@ -63,7 +61,7 @@ public class AccountTest {
         exList.add(ex1);
         ex2.setId(5);
         exList.add(ex2);
-        acc.setExtra_curricular_activity(exList);
+        //acc.setExtra_curricular_activity(exList);
 
         long id = srv.create(acc);
         assertEquals(true, id > 1001000 ? true : false);
@@ -86,15 +84,14 @@ public class AccountTest {
         acc.setGender("M");
         acc.setDob("1980-10-10");
         acc.setAccount_type(3);
-        acc.setUsername("username");
-
+     
         // HouseColor housecolor = new HouseColor();
         // housecolor.setHouse_color_id(3);
         // acc.setHousecolor(housecolor);
 
-        ClassRoom classRoomStudent = new ClassRoom();
-        classRoomStudent.setId(3);
-        acc.setClassroom(classRoomStudent);
+        //ClassRoom classRoomStudent = new ClassRoom();
+        //classRoomStudent.setId(3);
+        //acc.setClassroom(classRoomStudent);
 
         List<ExtraCurricularActivity> exList = new ArrayList<>();
         ExtraCurricularActivity ex1 = new ExtraCurricularActivity();
@@ -103,16 +100,10 @@ public class AccountTest {
         exList.add(ex1);
         ex2.setId(6);
         exList.add(ex2);
-        acc.setExtra_curricular_activity(exList);
+        //acc.setExtra_curricular_activity(exList);
 
         Account rs = srv.update(1580000, acc);
         assertEquals(1580000, rs.getAcconut_id());
         assertEquals(acc.getEmail(), rs.getEmail());
-    }
-
-    @Test
-    void accountGetByIdTests() {
-        Account acc = srv.findById(1349653);
-        assertEquals("iceman", acc.getUsername());
     }
 }

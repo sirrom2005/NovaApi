@@ -11,7 +11,8 @@ public class CountryState {
     @Id
     @Column(name = "zone_id")
     private int  state_id;
-    private int country_id;
+    @Column(name = "country_id")
+    private int countryid;
     private String name;
 
     public int getState_id() {
@@ -31,10 +32,10 @@ public class CountryState {
     }
 
     public int getCountry_id() {
-        return country_id;
+        return countryid;
     }
 
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
+    public void setCountry_id(int countryid) {
+        this.countryid = countryid;
     }
 }

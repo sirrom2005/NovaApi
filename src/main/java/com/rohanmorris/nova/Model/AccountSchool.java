@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class AccountSchool {
-
+public class AccountSchool
+{
     @Column(name = "school_id", table = "account_school")
     private int school_id;
 

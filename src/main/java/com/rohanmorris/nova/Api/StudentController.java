@@ -1,22 +1,26 @@
 package com.rohanmorris.nova.Api;
 
+import java.util.Optional;
+
+import javax.validation.Valid;
+
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Service.StudentService;
-import java.util.HashMap;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(maxAge = 3600)
 @RequestMapping("api/v1/students")
 @RestController
-public class StudentController {
-
+public class StudentController
+{
     private final StudentService srv;
 
     @Autowired
@@ -24,18 +28,18 @@ public class StudentController {
         this.srv = srv;
     }
 
-    @GetMapping()
-    public HashMap<String, List<Student>> read() {
-        return srv.read();
+    @PostMapping()
+    public Student save(@Valid @RequestBody Student entity) {
+        return srv.save(entity);
+    }
+
+    @GetMapping("{id}")
+    public Optional<Student> findById(@PathVariable("id") long id) {
+        return srv.findById(id);
     }
 
     @DeleteMapping("{id}")
-    public int delete(@PathVariable("id") int id) {
-        return 0;
-    }
-
-    @GetMapping("count")
-    public int get() {
-        return srv.getCount();
+    public void deleteById(@PathVariable("id") long id) {
+        srv.deleteById(id);
     }
 }

@@ -1,32 +1,32 @@
 package com.rohanmorris.nova.Service;
 
+import java.util.Optional;
+
 import com.rohanmorris.nova.Model.Student;
-import com.rohanmorris.nova.Repo.StudentRepo;
-import java.util.HashMap;
-import java.util.List;
+import com.rohanmorris.nova.Repo.IStudentRepo;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
 
-    private final StudentRepo repo;
+    private final IStudentRepo repo;
 
     /**
      * @param repo
      */
-    public StudentService(StudentRepo repo) {
+    public StudentService(IStudentRepo repo) {
         this.repo = repo;
     }
 
-    public HashMap<String, List<Student>> read() {
-        return repo.read();
+    public Student save(Student entity) {
+        return repo.save(entity);
     }
 
-    public int delete(int id) {
-        return repo.delete(id);
+    public void deleteById(long id) {
+        repo.deleteById(id);
     }
 
-    public int getCount() {
-        return repo.count();
+    public Optional<Student> findById(long id) {
+        return repo.findById(id);
     }
 }

@@ -30,4 +30,8 @@ public class SchoolService {
     public List<Subject> getSubjectSp() {
         return repo.getSubjectSp();
     }
+
+    public int getSchoolIdByUserId(int id) {
+        return repo.getSchoolIdByUserId(id);
+    }
 }

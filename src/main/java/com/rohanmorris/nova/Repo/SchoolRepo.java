@@ -68,6 +68,12 @@ public class SchoolRepo implements ISchool {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    public int getSchoolIdByUserId(int _id) {
+        return (int) getDbSession()
+                .createNativeQuery("SELECT school_id FROM account_school where account_id = :id LIMIT 1")
+                .setParameter("id", _id, IntegerType.INSTANCE).uniqueResult();
+    }
+
     //@SuppressWarnings("unchecked")
     public List<Subject> getSubjectSp() {
         return _repo.getSubjectSpX();

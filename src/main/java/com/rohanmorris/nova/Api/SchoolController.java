@@ -38,4 +38,9 @@ public class SchoolController {
     public List<Subject> getSubect() {
         return srv.getSubjectSp();
     }
+
+    @GetMapping("/schoolidbyuserid/{id}")
+    public int getSchoolIdByUserId(@PathVariable("id") int id) {
+        return srv.getSchoolIdByUserId(id);
+    }
 }

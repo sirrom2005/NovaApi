@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Immutable;
+
 @Entity
 @Table(name = "schools")
 public class School {
@@ -295,5 +297,43 @@ public class School {
 
     public void setState(CountryState state) {
         this.state = state;
+    }
+}
+
+@Immutable
+@Entity
+@Table(name = "schools")
+class SchoolStatic {
+    @Id
+    @Column(name = "id")
+    private int school_id;
+    private String name;
+
+    /**
+     * @return the school_id
+     */
+    public int getSchool_id() {
+        return school_id;
+    }
+
+    /**
+     * @param school_id the school_id to set
+     */
+    public void setSchool_id(int school_id) {
+        this.school_id = school_id;
+    }
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 }

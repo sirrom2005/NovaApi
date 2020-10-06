@@ -1,7 +1,5 @@
 package com.rohanmorris.nova.Model;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,7 +21,9 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
+/**
+ * Teacher info
+*/
 @Entity
 @Table(name = "accounts")
 @SecondaryTable(name = "account_school", pkJoinColumns = @PrimaryKeyJoinColumn(name = "account_id"))
@@ -33,10 +33,6 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long acconut_id;
-    @JsonIgnore
-    private String username;
-    @JsonIgnore
-    private String password;
     private String firstname;
     private String middlename;
     private String lastname;
@@ -58,29 +54,17 @@ public class Account {
     private String date_added;
     @Embedded()
     private AccountSchool accountschool;
-    @OneToOne
-    @JoinTable(name = "class_room_students", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "class_room_id"))
-    private ClassRoom classroom;
+    @OneToMany
+    @JoinTable(name = "teacher_form_class", joinColumns = @JoinColumn(name = "teacher_id"), inverseJoinColumns = @JoinColumn(name = "form_class"))
+    private List<ClassRoom> form_class = new ArrayList<ClassRoom>();
+    @OneToMany
+    @JoinColumn(name = "teacher_id")
+    private List<TeacherClassRoom> teacher_class_room = new ArrayList<TeacherClassRoom>();
     @Embedded()
     private Qualification qualification;
     @OneToOne
     @JoinTable(name = "house_color_account", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "house_color_id"))
     private HouseColor housecolor;
-    @OneToMany
-    @JoinTable(name = "account_ex_activity", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "extracurricular_activity_id"))
-    private List<ExtraCurricularActivity> extra_curricular_activity = new ArrayList<ExtraCurricularActivity>();
-    @OneToMany
-    @JoinTable(name = "account_responsibilities", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "responsibilities_id"))
-    private List<Responsibilities> responsibilities = new ArrayList<Responsibilities>();
-    @OneToMany
-    @JoinTable(name = "account_citizenship", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "citizenship_id"))
-    private List<Citizenship> citizenship = new ArrayList<Citizenship>();
-
-    public Account() {
-        this.setActive(1);
-        this.setDate_added();
-        this.setPassword("password");
-    }
 
     public long getAcconut_id() {
         return acconut_id;
@@ -88,46 +72,6 @@ public class Account {
 
     public void setAcconut_id(long acconut_id) {
         this.acconut_id = acconut_id;
-    }
-
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return this.password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    private void setPassword(String password) {
-        StringBuffer sb = new StringBuffer();
-        MessageDigest messageDigest;
-        try {
-            messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(password.getBytes());
-            byte[] digest = messageDigest.digest();
-            for (byte b : digest) {
-                sb.append(Integer.toHexString((b & 0xff)));
-            }
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-        this.password = sb.toString();
     }
 
     /**
@@ -348,15 +292,6 @@ public class Account {
     }
 
     /**
-     * @param date_added the date_added to set
-     */
-    private void setDate_added() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date dateobj = new Date();
-        this.date_added = df.format(dateobj);
-    }
-
-    /**
      * @return the enrollment_date
      */
     public String getEnrollment_date() {
@@ -386,30 +321,6 @@ public class Account {
         this.housecolor = housecolor;
     }
 
-    public List<ExtraCurricularActivity> getExtra_curricular_activity() {
-        return extra_curricular_activity;
-    }
-
-    public void setExtra_curricular_activity(List<ExtraCurricularActivity> extra_curricular_activity) {
-        this.extra_curricular_activity = extra_curricular_activity;
-    }
-
-    public List<Responsibilities> getResponsibilities() {
-        return responsibilities;
-    }
-
-    public void setResponsibilities(List<Responsibilities> responsibilities) {
-        this.responsibilities = responsibilities;
-    }
-
-    public List<Citizenship> getCitizenship() {
-        return citizenship;
-    }
-
-    public void setCitizenship(List<Citizenship> citizenship) {
-        this.citizenship = citizenship;
-    }
-
     public Qualification getQualification() {
         return qualification==null ? new Qualification() : qualification;
     }
@@ -418,11 +329,19 @@ public class Account {
         this.qualification = qualification;
     }
 
-    public ClassRoom getClassroom() {
-        return classroom==null ? new ClassRoom() : classroom;
+    public List<TeacherClassRoom> getTeacher_class_room() {
+        return teacher_class_room;
     }
 
-    public void setClassroom(ClassRoom classroom) {
-        this.classroom = classroom;
+    public void setTeacher_class_room(List<TeacherClassRoom> teacher_class_room) {
+        this.teacher_class_room = teacher_class_room;
+    }
+
+    public List<ClassRoom> getForm_class() {
+        return form_class;
+    }
+
+    public void setForm_class(List<ClassRoom> form_class) {
+        this.form_class = form_class;
     }
 }

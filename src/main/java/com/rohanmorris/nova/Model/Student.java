@@ -1,17 +1,26 @@
 package com.rohanmorris.nova.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Immutable;
 
 @Entity
-@Table(name = "view_student_info")
-@Immutable
+@Table(name = "accounts")
 public class Student {
     @Id
-    private int account_id;
-    private String username;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private long acconut_id;
     private String firstname;
     private String middlename;
     private String lastname;
@@ -20,44 +29,49 @@ public class Student {
     private String street;
     private String city_town;
     private String zip_code;
-    private int parish_id;
-    private int country_id;
     private String phone_home;
     private String phone_mobile;
     private String dob;
+    private String enrollment_date;
+    public int account_type;
     private int active;
-    private int house_color_id;
-    private String house_color;
-    private int class_id;
-    private int school_id;
-    private String formclass;
+    @OneToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
+    @OneToOne
+    @JoinColumn(name = "parish_id")
+    private CountryState country_state;
+    @OneToOne
+    @JoinTable(name = "account_school", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "school_id"))
+    private SchoolStatic account_school;
+    @OneToOne
+    @JoinTable(name = "class_room_students", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "class_room_id"))
+    private ClassRoom account_class;
+    @OneToOne
+    @JoinTable(name = "house_color_account", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "house_color_id"))
+    private HouseColor housecolor;
+    @OneToMany
+    @JoinTable(name = "account_ex_activity", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "extracurricular_activity_id"))
+    private List<ExtraCurricularActivity> extra_curricular_activity = new ArrayList<ExtraCurricularActivity>();
+    @OneToMany
+    @JoinTable(name = "account_responsibilities", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "responsibilities_id"))
+    private List<Responsibilities> responsibilities = new ArrayList<Responsibilities>();
+    @OneToMany
+    @JoinTable(name = "account_citizenship", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "citizenship_id"))
+    private List<Citizenship> citizenship = new ArrayList<Citizenship>();
 
     /**
-     * @return the account_id
+     * @return the acconut_id
      */
-    public int getAccount_id() {
-        return account_id;
+    public long getAcconut_id() {
+        return acconut_id;
     }
 
     /**
-     * @param account_id the account_id to set
+     * @param acconut_id the acconut_id to set
      */
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
-    }
-
-    /**
-     * @return the username
-     */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param username the username to set
-     */
-    public void setUsername(String username) {
-        this.username = username;
+    public void setAcconut_id(long acconut_id) {
+        this.acconut_id = acconut_id;
     }
 
     /**
@@ -173,34 +187,6 @@ public class Student {
     }
 
     /**
-     * @return the parish_id
-     */
-    public int getParish_id() {
-        return parish_id;
-    }
-
-    /**
-     * @param parish_id the parish_id to set
-     */
-    public void setParish_id(int parish_id) {
-        this.parish_id = parish_id;
-    }
-
-    /**
-     * @return the country_id
-     */
-    public int getCountry_id() {
-        return country_id;
-    }
-
-    /**
-     * @param country_id the country_id to set
-     */
-    public void setCountry_id(int country_id) {
-        this.country_id = country_id;
-    }
-
-    /**
      * @return the phone_home
      */
     public String getPhone_home() {
@@ -243,6 +229,34 @@ public class Student {
     }
 
     /**
+     * @return the enrollment_date
+     */
+    public String getEnrollment_date() {
+        return enrollment_date;
+    }
+
+    /**
+     * @param enrollment_date the enrollment_date to set
+     */
+    public void setEnrollment_date(String enrollment_date) {
+        this.enrollment_date = enrollment_date;
+    }
+
+    /**
+     * @return the account_type
+     */
+    public int getAccount_type() {
+        return account_type;
+    }
+
+    /**
+     * @param account_type the account_type to set
+     */
+    public void setAccount_type(int account_type) {
+        this.account_type = account_type;
+    }
+
+    /**
      * @return the active
      */
     public int getActive() {
@@ -256,67 +270,131 @@ public class Student {
         this.active = active;
     }
 
-    /**
-     * @return the house_color_id
-     */
-    public int getHouse_color_id() {
-        return house_color_id;
-    }
+    // /**
+    //  * @return the date_added
+    //  */
+    // public String getDate_added() {
+    //     return this.date_added;
+    // }
+
+    // /**
+    //  * @param date_added the date_added to set
+    //  */
+    // private void setDate_added() {
+    //     DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    //     Date dateobj = new Date();
+    //     this.date_added = df.format(dateobj);
+    // }
 
     /**
-     * @param house_color_id the house_color_id to set
+     * @return the housecolor
      */
-    public void setHouse_color_id(int house_color_id) {
-        this.house_color_id = house_color_id;
-    }
-
-    /**
-     * @return the house_color
-     */
-    public String getHouse_color() {
-        return house_color;
-    }
-
-    /**
-     * @param house_color the house_color to set
-     */
-    public void setHouse_color(String house_color) {
-        this.house_color = house_color;
+    public HouseColor getHousecolor() {
+        return housecolor==null ? new HouseColor() : housecolor;
     }
 
     /**
-     * @return the class_id
+     * @param housecolor the housecolor to set
      */
-    public int getClass_id() {
-        return class_id;
+    public void setHousecolor(HouseColor housecolor) {
+        this.housecolor = housecolor;
     }
 
     /**
-     * @param class_id the class_id to set
+     * @return the extra_curricular_activity
      */
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
+    public List<ExtraCurricularActivity> getExtra_curricular_activity() {
+        return extra_curricular_activity;
     }
 
     /**
-     * @return the school_id
+     * @param extra_curricular_activity the extra_curricular_activity to set
      */
-    public int getSchool_id() {
-        return school_id;
+    public void setExtra_curricular_activity(List<ExtraCurricularActivity> extra_curricular_activity) {
+        this.extra_curricular_activity = extra_curricular_activity;
     }
 
     /**
-     * @param school_id the school_id to set
+     * @return the responsibilities
      */
-    public void setSchool_id(int school_id) {
-        this.school_id = school_id;
+    public List<Responsibilities> getResponsibilities() {
+        return responsibilities;
     }
 
-    public String getFormclass() {
-        return formclass;
+    /**
+     * @param responsibilities the responsibilities to set
+     */
+    public void setResponsibilities(List<Responsibilities> responsibilities) {
+        this.responsibilities = responsibilities;
     }
 
-    public void setFormclass(String formclass) {
-        this.formclass = formclass;
+    /**
+     * @return the citizenship
+     */
+    public List<Citizenship> getCitizenship() {
+        return citizenship;
+    }
+
+    /**
+     * @param citizenship the citizenship to set
+     */
+    public void setCitizenship(List<Citizenship> citizenship) {
+        this.citizenship = citizenship;
+    }
+
+    /**
+     * @return the country
+     */
+    public Country getCountry() {
+        return country==null ? new Country() : country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    /**
+     * @return the country_state
+     */
+    public CountryState getCountry_state() {
+        return country_state;
+    }
+
+    /**
+     * @param country_tate the country_state to set
+     */
+    public void setCountry_state(CountryState country_state) {
+        this.country_state = country_state;
+    }
+
+    /**
+     * @return the account_class
+     */
+    public ClassRoom getAccount_class() {
+        return account_class;
+    }
+
+    /**
+     * @param account_class the account_class to set
+     */
+    public void setAccount_class(ClassRoom account_class) {
+        this.account_class = account_class;
+    }
+
+    /**
+     * @return the account_school
+     */
+    public SchoolStatic getAccount_school() {
+        return account_school;
+    }
+
+    /**
+     * @param account_school the account_school to set
+     */
+    public void setAccount_school(SchoolStatic account_school) {
+        this.account_school = account_school;
     }
 }

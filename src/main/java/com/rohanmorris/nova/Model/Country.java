@@ -1,14 +1,13 @@
 package com.rohanmorris.nova.Model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Immutable;
+
+@Immutable
 @Entity
 @Table(name = "odb_country")
 public class Country {
@@ -16,10 +15,7 @@ public class Country {
     @Column(name = "country_id")
     public int id;
     public String name;
-    @OneToMany()
-    @JoinColumn(name = "country_id")
-    private List<CountryState> countrystate;
-    
+
     /**
      * @return the id
      */
@@ -46,13 +42,5 @@ public class Country {
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<CountryState> getCountrystate() {
-        return countrystate;
-    }
-
-    public void setCountrystate(List<CountryState> countrystate) {
-        this.countrystate = countrystate;
     }
 }

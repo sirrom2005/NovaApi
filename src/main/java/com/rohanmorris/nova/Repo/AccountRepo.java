@@ -31,13 +31,6 @@ public class AccountRepo implements IAccount {
     @Override
     public long create(Account account) {
         Session session = getDbSession();
-        String fname = account.getFirstname().trim().equals("") ? "A"
-                : account.getFirstname().replaceAll("[^A-Za-z]+", "").substring(0, 1).toLowerCase();
-        String lname = account.getLastname().trim().equals("") ? "B"
-                : account.getLastname().replaceAll("[^A-Za-z]+", "").toLowerCase();
-
-        String username = fname.concat(lname).concat(String.valueOf((int) (9999 * Math.random())));
-        account.setUsername(username);
 
         Object id = session.save(account);
 
