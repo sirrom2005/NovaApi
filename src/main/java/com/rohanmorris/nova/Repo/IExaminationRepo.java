@@ -1,7 +1,6 @@
 package com.rohanmorris.nova.Repo;
 
 import com.rohanmorris.nova.Model.Examination;
-
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 

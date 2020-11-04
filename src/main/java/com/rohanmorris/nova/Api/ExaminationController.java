@@ -4,6 +4,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import com.rohanmorris.nova.Model.Examination;
+import com.rohanmorris.nova.Model.ExaminationResults;
+import com.rohanmorris.nova.Model.UpcomingExam;
 import com.rohanmorris.nova.Service.ExamaminationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,5 +50,15 @@ public class ExaminationController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") long id) {
         srv.deleteById(id);
+    }
+
+    @GetMapping("/student/upcoming_exams/{id}")
+    public Iterable<UpcomingExam> getUpcomingExams(@PathVariable("id") long studentId) {
+        return srv.getUpcomingExams(studentId);
+    }
+
+    @GetMapping("/student/exam_result/{student_id}/{class_id}")
+    public Iterable<ExaminationResults> getExamResultsForClassByStudentId(@PathVariable("student_id") long student_id, @PathVariable("class_id") long class_id) {
+        return srv.getExamResultsForClassByStudentId(student_id, class_id);
     }
 }

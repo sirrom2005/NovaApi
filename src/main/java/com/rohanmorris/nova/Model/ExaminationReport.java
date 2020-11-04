@@ -35,7 +35,7 @@ public class ExaminationReport {
     private String house_color;
     @OneToMany()
     @JoinColumn(name = "student_id")
-    private List<ExaminationGrade> examination_grade = new ArrayList<ExaminationGrade>();;
+    private List<ExaminationResults> examination_grade = new ArrayList<ExaminationResults>();;
 
     /**
      * @return the account_id
@@ -250,14 +250,14 @@ public class ExaminationReport {
     /**
      * @return the examination_grade
      */
-    public List<ExaminationGrade> getExamination_grade() {
+    public List<ExaminationResults> getExamination_grade() {
         return examination_grade;
     }
 
     /**
      * @param examination_grade the examination_grade to set
      */
-    public void setExamination_grade(List<ExaminationGrade> examination_grade) {
+    public void setExamination_grade(List<ExaminationResults> examination_grade) {
         this.examination_grade = examination_grade;
     }
 
