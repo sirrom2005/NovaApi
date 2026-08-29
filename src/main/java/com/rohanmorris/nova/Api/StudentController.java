@@ -2,11 +2,9 @@ package com.rohanmorris.nova.Api;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import com.rohanmorris.nova.Model.Student;
 import com.rohanmorris.nova.Service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +21,12 @@ public class StudentController
 {
     private final StudentService srv;
 
-    @Autowired
     public StudentController(StudentService srv) {
         this.srv = srv;
     }
 
     @PostMapping()
-    public Student save(@Valid @RequestBody Student entity) {
+    public Student save(@Validated @RequestBody Student entity) {
         return srv.save(entity);
     }
 

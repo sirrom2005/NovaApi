@@ -2,11 +2,10 @@ package com.rohanmorris.nova.Api;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.rohanmorris.nova.Model.StudentBehavior;
 import com.rohanmorris.nova.Service.StudentBehaviorService;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +26,7 @@ public class StudentBehaviorController{
     }
 
     @PostMapping()
-    public long create(@Valid @RequestBody StudentBehavior data) {
+    public long create(@Validated @RequestBody StudentBehavior data) {
         return srv.create(data);
     }
 

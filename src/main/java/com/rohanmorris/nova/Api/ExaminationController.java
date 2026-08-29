@@ -1,13 +1,12 @@
 package com.rohanmorris.nova.Api;
 
 import java.util.Optional;
-import javax.validation.Valid;
-
 import com.rohanmorris.nova.Model.Examination;
 import com.rohanmorris.nova.Model.ExaminationResults;
 import com.rohanmorris.nova.Model.UpcomingExam;
 import com.rohanmorris.nova.Service.ExamaminationService;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +41,7 @@ public class ExaminationController {
     }
 
     @PostMapping()
-    public Examination create(@Valid @RequestBody Examination exam) {
+    public Examination create(@Validated @RequestBody Examination exam) {
         return srv.create(exam);
     }
 

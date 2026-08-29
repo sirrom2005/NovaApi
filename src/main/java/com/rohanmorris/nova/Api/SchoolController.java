@@ -6,7 +6,6 @@ import com.rohanmorris.nova.Model.School;
 import com.rohanmorris.nova.Model.Subject;
 import com.rohanmorris.nova.Service.SchoolService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class SchoolController {
     private final SchoolService srv;
 
-    @Autowired
     public SchoolController(SchoolService srv) {
         this.srv = srv;
     }

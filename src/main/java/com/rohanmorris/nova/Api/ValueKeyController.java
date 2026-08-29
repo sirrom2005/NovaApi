@@ -13,7 +13,6 @@ import com.rohanmorris.nova.Model.Responsibilities;
 import com.rohanmorris.nova.Model.Subject;
 import com.rohanmorris.nova.Service.ValueKeySevice;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class ValueKeyController implements IValueKeyObject {
     private final ValueKeySevice srv;
 
-    @Autowired
     public ValueKeyController(ValueKeySevice srv) {
         this.srv = srv;
     }

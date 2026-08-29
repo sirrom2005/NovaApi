@@ -82,7 +82,7 @@ public class StudentBehaviorRepo implements IStudentBehavior {
 
     @Override
     public long delete(long id) {
-        long rs = getDbSession().createSQLQuery("DELETE FROM student_conduct_behavior WHERE id = :id")
+        long rs = getDbSession().createQuery("DELETE FROM student_conduct_behavior WHERE id = :id")
         .setParameter("id", id, LongType.INSTANCE).executeUpdate();
         if (rs > 0) {
             return rs;

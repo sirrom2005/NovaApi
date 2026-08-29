@@ -2,12 +2,11 @@ package com.rohanmorris.nova.Api;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import com.rohanmorris.nova.Interface.IAccount;
 import com.rohanmorris.nova.Model.Account;
 import com.rohanmorris.nova.Service.AccountService;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +28,7 @@ public class AccountController implements IAccount {
 
     @PostMapping()
     @Override
-    public long create(@Valid @RequestBody Account account) {
+    public long create(@Validated @RequestBody Account account) {
         return srv.create(account);
     }
 
@@ -47,7 +46,7 @@ public class AccountController implements IAccount {
 
     @PutMapping("{id}")
     @Override
-    public Account update(@PathVariable("id") long id, @Valid @RequestBody Account account) {
+    public Account update(@PathVariable("id") long id, @Validated @RequestBody Account account) {
         return srv.update(id, account);
     }
 }

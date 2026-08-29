@@ -1,10 +1,9 @@
 package com.rohanmorris.nova.Api;
 
-import javax.validation.Valid;
-
 import com.rohanmorris.nova.Model.ExamGrade;
 import com.rohanmorris.nova.Service.ExamGradeService;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,7 +24,7 @@ public class ExamGradeController {
     }
 
     @PostMapping()
-    public ExamGrade create(@Valid @RequestBody ExamGrade grade) {
+    public ExamGrade create(@Validated @RequestBody ExamGrade grade) {
         return srv.create(grade);
     }
 }
